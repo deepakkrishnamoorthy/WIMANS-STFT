@@ -1,0 +1,50 @@
+# Python/runtime cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments and local IDE state
+.venv/
+venv/
+env/
+.idea/
+.vscode/
+
+# Large WiFi CSI datasets and generated STFT artifacts
+dataset/
+**/dataset/
+*.npy
+*.npz
+*.mat
+
+# Model checkpoints and training artifacts
+*.pth
+*.pt
+*.ckpt
+*.onnx
+checkpoints/
+saved_models*/
+**/saved_models*/
+
+# Generated experiment outputs
+multi_head_experiments/outputs/
+resnet_baseline/outputs/
+top5_subcarrier_experiments/outputs/
+stft_extraction/outputs/
+
+# Large generated media
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.bmp
+
+# Keep the paper architecture diagram tracked
+!multi_head_experiments/docs/stft_top5_multihead_architecture.png
+
+# Temporary extracted paper text
+paper_text_tmp.txt
+wimans_recent_2026_text.txt

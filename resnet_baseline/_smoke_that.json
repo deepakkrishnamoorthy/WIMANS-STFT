@@ -1,0 +1,161 @@
+{
+    "args": {
+        "annotation": "D:\\Deepak\\wifi_csi\\WiMANS-main\\dataset\\annotation.csv",
+        "data_dir": "D:\\Deepak\\wifi_csi\\dataset\\stft_top5_npy",
+        "band": "2.4",
+        "epochs": 1,
+        "repeat": 1,
+        "batch_size": 16,
+        "lr": 0.0001,
+        "weight_decay": 0.0001,
+        "threshold": 0.5,
+        "normalize": "log_standard",
+        "split_seed": 39,
+        "seed_start": 39,
+        "test_size": 0.2,
+        "val_size": 0.2,
+        "num_workers": 0,
+        "save_dir": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_that_style",
+        "result_json": "resnet_baseline\\_smoke_that.json"
+    },
+    "model": "that_style",
+    "results": {
+        "2.4": {
+            "classroom": {
+                "activity_accuracy": {
+                    "avg": 4.420866489832007,
+                    "std": 0.0,
+                    "text": "4.42+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 0.0,
+                    "std": 0.0,
+                    "text": "0.00+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 10.226457628855416,
+                    "std": 0.0,
+                    "text": "10.23+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 8.784364129541924,
+                    "std": 0.0,
+                    "text": "8.78+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 43.03467924157579,
+                    "std": 0.0,
+                    "text": "43.03+/-0.00"
+                },
+                "loss": {
+                    "avg": 1.3673386589601755,
+                    "std": 0.0,
+                    "text": "1.37+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 1.3673386589601755,
+                        "activity_accuracy": 4.420866489832007,
+                        "exact_54_accuracy": 0.0,
+                        "micro_f1": 10.226457628855416,
+                        "macro_f1": 8.784364129541924,
+                        "hamming_loss": 43.03467924157579,
+                        "seed": 39,
+                        "best_epoch": 1,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_that_style\\that_style_classroom_2.4_seed39.pth"
+                    }
+                ]
+            },
+            "meeting_room": {
+                "activity_accuracy": {
+                    "avg": 3.8461538461538463,
+                    "std": 0.0,
+                    "text": "3.85+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 0.0,
+                    "std": 0.0,
+                    "text": "0.00+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 9.559613319011815,
+                    "std": 0.0,
+                    "text": "9.56+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 8.84765264311044,
+                    "std": 0.0,
+                    "text": "8.85+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 49.63159445918067,
+                    "std": 0.0,
+                    "text": "49.63+/-0.00"
+                },
+                "loss": {
+                    "avg": 1.3746647879046534,
+                    "std": 0.0,
+                    "text": "1.37+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 1.3746647879046534,
+                        "activity_accuracy": 3.8461538461538463,
+                        "exact_54_accuracy": 0.0,
+                        "micro_f1": 9.559613319011815,
+                        "macro_f1": 8.84765264311044,
+                        "hamming_loss": 49.63159445918067,
+                        "seed": 39,
+                        "best_epoch": 1,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_that_style\\that_style_meeting_room_2.4_seed39.pth"
+                    }
+                ]
+            },
+            "empty_room": {
+                "activity_accuracy": {
+                    "avg": 8.885941644562333,
+                    "std": 0.0,
+                    "text": "8.89+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 0.0,
+                    "std": 0.0,
+                    "text": "0.00+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 9.098884572001504,
+                    "std": 0.0,
+                    "text": "9.10+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 7.341342133619541,
+                    "std": 0.0,
+                    "text": "7.34+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 35.62727183416838,
+                    "std": 0.0,
+                    "text": "35.63+/-0.00"
+                },
+                "loss": {
+                    "avg": 1.3842532062404036,
+                    "std": 0.0,
+                    "text": "1.38+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 1.3842532062404036,
+                        "activity_accuracy": 8.885941644562333,
+                        "exact_54_accuracy": 0.0,
+                        "micro_f1": 9.098884572001504,
+                        "macro_f1": 7.341342133619541,
+                        "hamming_loss": 35.62727183416838,
+                        "seed": 39,
+                        "best_epoch": 1,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_that_style\\that_style_empty_room_2.4_seed39.pth"
+                    }
+                ]
+            }
+        }
+    }
+}

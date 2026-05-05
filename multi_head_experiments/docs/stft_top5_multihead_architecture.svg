@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f3a4a"/>
+    </marker>
+    <style>
+      .title { font-family: Arial, Helvetica, sans-serif; font-size: 34px; font-weight: 700; fill: #172033; }
+      .subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 18px; fill: #4e5b6e; }
+      .section { font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: 700; fill: #334155; letter-spacing: 0.3px; }
+      .box-title { font-family: Arial, Helvetica, sans-serif; font-size: 21px; font-weight: 700; fill: #172033; }
+      .box-text { font-family: Arial, Helvetica, sans-serif; font-size: 16px; fill: #435267; }
+      .tiny { font-family: Arial, Helvetica, sans-serif; font-size: 14px; fill: #5b677a; }
+      .box { stroke: #405169; stroke-width: 1.8; rx: 12; ry: 12; }
+      .input { fill: #e9f5ff; }
+      .prep { fill: #eefaf3; }
+      .enc { fill: #fff5df; }
+      .head1 { fill: #f0ecff; }
+      .head2 { fill: #ffeef2; }
+      .head3 { fill: #eef2ff; }
+      .loss { fill: #f7f8fb; }
+      .arrow { stroke: #2f3a4a; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .dash { stroke-dasharray: 7 6; }
+      .band { fill: #f8fafc; stroke: #d8dee8; stroke-width: 1.5; rx: 14; ry: 14; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="920" fill="#ffffff"/>
+
+  <text x="70" y="66" class="title">STFT Top-5 Multi-Head CLSTM Architecture</text>
+  <text x="72" y="98" class="subtitle">Compact WiFi CSI representation with shared temporal feature learning and task-specific supervision</text>
+
+  <rect x="55" y="130" width="1490" height="185" class="band"/>
+  <text x="75" y="160" class="section">Input And STFT Representation</text>
+
+  <rect x="85" y="185" width="255" height="90" class="box input"/>
+  <text x="110" y="218" class="box-title">Raw CSI Amplitude</text>
+  <text x="110" y="246" class="box-text">WiMANS sample</text>
+  <text x="110" y="269" class="tiny">3 Tx x 3 Rx x 30 subcarriers</text>
+
+  <rect x="405" y="185" width="260" height="90" class="box input"/>
+  <text x="430" y="218" class="box-title">Top-5 Subcarriers</text>
+  <text x="430" y="246" class="box-text">Keep informative carriers</text>
+  <text x="430" y="269" class="tiny">3 x 3 x 5 = 45 CSI streams</text>
+
+  <rect x="730" y="185" width="275" height="90" class="box prep"/>
+  <text x="755" y="218" class="box-title">STFT Extraction</text>
+  <text x="755" y="246" class="box-text">Time-frequency transform</text>
+  <text x="755" y="269" class="tiny">Per selected CSI stream</text>
+
+  <rect x="1070" y="185" width="305" height="90" class="box prep"/>
+  <text x="1095" y="218" class="box-title">45-Channel STFT Tensor</text>
+  <text x="1095" y="246" class="box-text">Input to neural model</text>
+  <text x="1095" y="269" class="tiny">C x F x T = 45 x 129 x 200</text>
+
+  <path d="M 340 230 L 405 230" class="arrow"/>
+  <path d="M 665 230 L 730 230" class="arrow"/>
+  <path d="M 1005 230 L 1070 230" class="arrow"/>
+
+  <rect x="55" y="350" width="1490" height="230" class="band"/>
+  <text x="75" y="380" class="section">Shared Feature Extractor</text>
+
+  <rect x="115" y="420" width="260" height="100" class="box prep"/>
+  <text x="140" y="452" class="box-title">Normalization</text>
+  <text x="140" y="480" class="box-text">log1p + per-channel standardization</text>
+  <text x="140" y="503" class="tiny">Training augmentation optional</text>
+
+  <rect x="455" y="420" width="275" height="100" class="box enc"/>
+  <text x="480" y="452" class="box-title">ResNet18 Backbone</text>
+  <text x="480" y="480" class="box-text">2D convolutional feature extraction</text>
+  <text x="480" y="503" class="tiny">First conv adapted to 45 channels</text>
+
+  <rect x="815" y="420" width="275" height="100" class="box enc"/>
+  <text x="840" y="452" class="box-title">Temporal Sequence</text>
+  <text x="840" y="480" class="box-text">Mean over frequency axis</text>
+  <text x="840" y="503" class="tiny">Feature map to time sequence</text>
+
+  <rect x="1175" y="420" width="275" height="100" class="box enc"/>
+  <text x="1200" y="452" class="box-title">BiLSTM Temporal Model</text>
+  <text x="1200" y="480" class="box-text">Contextual temporal aggregation</text>
+  <text x="1200" y="503" class="tiny">Pooled shared representation z</text>
+
+  <path d="M 1375 230 C 1460 230 1510 300 1510 350 C 1510 410 1460 470 1450 470" class="arrow"/>
+  <path d="M 375 470 L 455 470" class="arrow"/>
+  <path d="M 730 470 L 815 470" class="arrow"/>
+  <path d="M 1090 470 L 1175 470" class="arrow"/>
+
+  <rect x="55" y="615" width="1490" height="210" class="band"/>
+  <text x="75" y="645" class="section">Multi-Head Supervision</text>
+
+  <rect x="115" y="685" width="305" height="95" class="box head1"/>
+  <text x="140" y="717" class="box-title">Activity-Set Head</text>
+  <text x="140" y="745" class="box-text">9 sigmoid outputs</text>
+  <text x="140" y="768" class="tiny">Which activities appear in the scene?</text>
+
+  <rect x="490" y="685" width="305" height="95" class="box head2"/>
+  <text x="515" y="717" class="box-title">Occupancy Head</text>
+  <text x="515" y="745" class="box-text">6 sigmoid outputs</text>
+  <text x="515" y="768" class="tiny">Which user slots are active?</text>
+
+  <rect x="865" y="685" width="305" height="95" class="box head3"/>
+  <text x="890" y="717" class="box-title">User-Slot Activity Head</text>
+  <text x="890" y="745" class="box-text">54 sigmoid outputs</text>
+  <text x="890" y="768" class="tiny">6 user slots x 9 activities</text>
+
+  <rect x="1240" y="675" width="255" height="115" class="box loss"/>
+  <text x="1265" y="710" class="box-title">Training Objective</text>
+  <text x="1265" y="738" class="box-text">Weighted BCE losses</text>
+  <text x="1265" y="761" class="tiny">+ occupancy consistency</text>
+  <text x="1265" y="782" class="tiny">+ active-count regularizer</text>
+
+  <path d="M 1312 520 C 1312 600 267 600 267 685" class="arrow"/>
+  <path d="M 1312 520 C 1312 600 642 600 642 685" class="arrow"/>
+  <path d="M 1312 520 C 1312 600 1017 600 1017 685" class="arrow"/>
+  <path d="M 420 733 L 490 733" class="arrow dash"/>
+  <path d="M 795 733 L 865 733" class="arrow dash"/>
+  <path d="M 1170 733 L 1240 733" class="arrow"/>
+
+  <rect x="90" y="850" width="1420" height="45" fill="#f8fafc" stroke="#d8dee8" stroke-width="1.2" rx="10" ry="10"/>
+  <text x="115" y="878" class="tiny">Evaluation reports activity-set F1, occupancy F1, active-slot F1, 54-label F1, and class-wise confusion diagnostics. Validation selects the best checkpoint; test is evaluated once.</text>
+</svg>

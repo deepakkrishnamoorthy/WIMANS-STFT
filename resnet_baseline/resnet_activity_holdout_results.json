@@ -1,0 +1,632 @@
+{
+    "args": {
+        "annotation": "D:\\Deepak\\wifi_csi\\WiMANS-main\\dataset\\annotation.csv",
+        "data_dir": "D:\\Deepak\\wifi_csi\\dataset\\stft_top5_npy",
+        "band": "all",
+        "epochs": 50,
+        "repeat": 3,
+        "batch_size": 64,
+        "lr": 0.0001,
+        "weight_decay": 0.0001,
+        "threshold": 0.5,
+        "normalize": "log_standard",
+        "split_seed": 39,
+        "seed_start": 39,
+        "test_size": 0.2,
+        "val_size": 0.2,
+        "num_workers": 0,
+        "save_dir": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout",
+        "result_json": "D:\\Deepak\\wifi_csi\\resnet_baseline\\resnet_activity_holdout_results.json"
+    },
+    "results": {
+        "2.4": {
+            "classroom": {
+                "activity_accuracy": {
+                    "avg": 56.513409961685824,
+                    "std": 0.07514028166213953,
+                    "text": "56.51+/-0.08"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.1830238726790454,
+                    "std": 4.440892098500626e-16,
+                    "text": "3.18+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 0.06775067750677508,
+                    "std": 0.0958139269900471,
+                    "text": "0.07+/-0.10"
+                },
+                "macro_f1": {
+                    "avg": 0.0949667616334283,
+                    "std": 0.1343032822766472,
+                    "text": "0.09+/-0.13"
+                },
+                "hamming_loss": {
+                    "avg": 4.84494220126404,
+                    "std": 0.026704500164227086,
+                    "text": "4.84+/-0.03"
+                },
+                "loss": {
+                    "avg": 2.5438592710081824,
+                    "std": 0.3198501004383422,
+                    "text": "2.54+/-0.32"
+                },
+                "repeats": [
+                    {
+                        "loss": 2.0936552390495726,
+                        "activity_accuracy": 56.41025641025641,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.0,
+                        "macro_f1": 0.0,
+                        "hamming_loss": 4.882601434325572,
+                        "seed": 39,
+                        "best_epoch": 14,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_2.4_seed39.pth"
+                    },
+                    {
+                        "loss": 2.7309694808737355,
+                        "activity_accuracy": 56.58709106984969,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.20325203252032523,
+                        "macro_f1": 0.2849002849002849,
+                        "hamming_loss": 4.823656547794479,
+                        "seed": 40,
+                        "best_epoch": 24,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_2.4_seed40.pth"
+                    },
+                    {
+                        "loss": 2.8069530931012383,
+                        "activity_accuracy": 56.542882404951364,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.0,
+                        "macro_f1": 0.0,
+                        "hamming_loss": 4.82856862167207,
+                        "seed": 41,
+                        "best_epoch": 27,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_2.4_seed41.pth"
+                    }
+                ]
+            },
+            "meeting_room": {
+                "activity_accuracy": {
+                    "avg": 56.5281461833186,
+                    "std": 0.0208401644912008,
+                    "text": "56.53+/-0.02"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.1830238726790454,
+                    "std": 4.440892098500626e-16,
+                    "text": "3.18+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 0.06720430107526881,
+                    "std": 0.09504123403044994,
+                    "text": "0.07+/-0.10"
+                },
+                "macro_f1": {
+                    "avg": 0.0617283950617284,
+                    "std": 0.0872971334798207,
+                    "text": "0.06+/-0.09"
+                },
+                "hamming_loss": {
+                    "avg": 4.8416674853456465,
+                    "std": 0.015184233054156551,
+                    "text": "4.84+/-0.02"
+                },
+                "loss": {
+                    "avg": 2.9906053766542366,
+                    "std": 0.32395749313900085,
+                    "text": "2.99+/-0.32"
+                },
+                "repeats": [
+                    {
+                        "loss": 3.0431348246668,
+                        "activity_accuracy": 56.542882404951364,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.0,
+                        "macro_f1": 0.0,
+                        "hamming_loss": 4.82856862167207,
+                        "seed": 39,
+                        "best_epoch": 29,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_2.4_seed39.pth"
+                    },
+                    {
+                        "loss": 3.35848932873349,
+                        "activity_accuracy": 56.542882404951364,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.0,
+                        "macro_f1": 0.0,
+                        "hamming_loss": 4.833480695549661,
+                        "seed": 40,
+                        "best_epoch": 38,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_2.4_seed40.pth"
+                    },
+                    {
+                        "loss": 2.5701919765624193,
+                        "activity_accuracy": 56.49867374005305,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.20161290322580644,
+                        "macro_f1": 0.1851851851851852,
+                        "hamming_loss": 4.862953138815207,
+                        "seed": 41,
+                        "best_epoch": 22,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_2.4_seed41.pth"
+                    }
+                ]
+            },
+            "empty_room": {
+                "activity_accuracy": {
+                    "avg": 56.45446507515473,
+                    "std": 0.03609622373685839,
+                    "text": "56.45+/-0.04"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.1830238726790454,
+                    "std": 4.440892098500626e-16,
+                    "text": "3.18+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 0.06740815638692282,
+                    "std": 0.09532952897695283,
+                    "text": "0.07+/-0.10"
+                },
+                "macro_f1": {
+                    "avg": 0.08818342151675485,
+                    "std": 0.1247101906854581,
+                    "text": "0.09+/-0.12"
+                },
+                "hamming_loss": {
+                    "avg": 4.86131578085601,
+                    "std": 0.01518423305415671,
+                    "text": "4.86+/-0.02"
+                },
+                "loss": {
+                    "avg": 2.86560958302411,
+                    "std": 0.40565903877341597,
+                    "text": "2.87+/-0.41"
+                },
+                "repeats": [
+                    {
+                        "loss": 2.432096002588854,
+                        "activity_accuracy": 56.41025641025641,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.0,
+                        "macro_f1": 0.0,
+                        "hamming_loss": 4.882601434325572,
+                        "seed": 39,
+                        "best_epoch": 19,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_2.4_seed39.pth"
+                    },
+                    {
+                        "loss": 2.756961448123031,
+                        "activity_accuracy": 56.49867374005305,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.0,
+                        "macro_f1": 0.0,
+                        "hamming_loss": 4.853128991060025,
+                        "seed": 40,
+                        "best_epoch": 26,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_2.4_seed40.pth"
+                    },
+                    {
+                        "loss": 3.407771298360445,
+                        "activity_accuracy": 56.45446507515472,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.20222446916076847,
+                        "macro_f1": 0.26455026455026454,
+                        "hamming_loss": 4.848216917182435,
+                        "seed": 41,
+                        "best_epoch": 46,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_2.4_seed41.pth"
+                    }
+                ]
+            }
+        },
+        "5": {
+            "classroom": {
+                "activity_accuracy": {
+                    "avg": 56.79339817270852,
+                    "std": 0.30272087509835033,
+                    "text": "56.79+/-0.30"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.5366931918656057,
+                    "std": 0.1250409869472232,
+                    "text": "3.54+/-0.13"
+                },
+                "micro_f1": {
+                    "avg": 8.057513386507651,
+                    "std": 0.7053767399697057,
+                    "text": "8.06+/-0.71"
+                },
+                "macro_f1": {
+                    "avg": 6.709469725698824,
+                    "std": 1.0289143026625078,
+                    "text": "6.71+/-1.03"
+                },
+                "hamming_loss": {
+                    "avg": 5.03815044044929,
+                    "std": 0.05078449886783541,
+                    "text": "5.04+/-0.05"
+                },
+                "loss": {
+                    "avg": 2.544530026370925,
+                    "std": 0.16639353898059397,
+                    "text": "2.54+/-0.17"
+                },
+                "repeats": [
+                    {
+                        "loss": 2.637636952438152,
+                        "activity_accuracy": 57.02917771883289,
+                        "exact_54_accuracy": 3.7135278514588856,
+                        "micro_f1": 7.097361237488626,
+                        "macro_f1": 5.256956092918241,
+                        "hamming_loss": 5.015227429020532,
+                        "seed": 39,
+                        "best_epoch": 40,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_5_seed39.pth"
+                    },
+                    {
+                        "loss": 2.6851356933856834,
+                        "activity_accuracy": 56.98496905393458,
+                        "exact_54_accuracy": 3.4482758620689653,
+                        "micro_f1": 8.303249097472925,
+                        "macro_f1": 7.360559572779943,
+                        "hamming_loss": 4.990667059632576,
+                        "seed": 40,
+                        "best_epoch": 44,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_5_seed40.pth"
+                    },
+                    {
+                        "loss": 2.3108174332889386,
+                        "activity_accuracy": 56.366047745358095,
+                        "exact_54_accuracy": 3.4482758620689653,
+                        "micro_f1": 8.771929824561402,
+                        "macro_f1": 7.510893511398289,
+                        "hamming_loss": 5.108556832694764,
+                        "seed": 41,
+                        "best_epoch": 29,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_5_seed41.pth"
+                    }
+                ]
+            },
+            "meeting_room": {
+                "activity_accuracy": {
+                    "avg": 56.145004420866485,
+                    "std": 0.30840627079953153,
+                    "text": "56.15+/-0.31"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.6251105216622457,
+                    "std": 0.1250409869472232,
+                    "text": "3.63+/-0.13"
+                },
+                "micro_f1": {
+                    "avg": 5.281793857172656,
+                    "std": 0.5876684577384396,
+                    "text": "5.28+/-0.59"
+                },
+                "macro_f1": {
+                    "avg": 4.266010954313601,
+                    "std": 0.3289749093503321,
+                    "text": "4.27+/-0.33"
+                },
+                "hamming_loss": {
+                    "avg": 5.047974588204473,
+                    "std": 0.03895398124691434,
+                    "text": "5.05+/-0.04"
+                },
+                "loss": {
+                    "avg": 2.8167410794872825,
+                    "std": 0.048784603955197764,
+                    "text": "2.82+/-0.05"
+                },
+                "repeats": [
+                    {
+                        "loss": 2.8852671229870945,
+                        "activity_accuracy": 55.79133510167993,
+                        "exact_54_accuracy": 3.7135278514588856,
+                        "micro_f1": 5.646630236794172,
+                        "macro_f1": 4.557166323134216,
+                        "hamming_loss": 5.088908537184399,
+                        "seed": 39,
+                        "best_epoch": 48,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_5_seed39.pth"
+                    },
+                    {
+                        "loss": 2.775546795493412,
+                        "activity_accuracy": 56.542882404951364,
+                        "exact_54_accuracy": 3.7135278514588856,
+                        "micro_f1": 5.746061167747914,
+                        "macro_f1": 4.434691364275242,
+                        "hamming_loss": 4.9955791335101685,
+                        "seed": 40,
+                        "best_epoch": 41,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_5_seed40.pth"
+                    },
+                    {
+                        "loss": 2.7894093199813397,
+                        "activity_accuracy": 56.10079575596817,
+                        "exact_54_accuracy": 3.4482758620689653,
+                        "micro_f1": 4.452690166975881,
+                        "macro_f1": 3.806175175531347,
+                        "hamming_loss": 5.059436093918852,
+                        "seed": 41,
+                        "best_epoch": 41,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_5_seed41.pth"
+                    }
+                ]
+            },
+            "empty_room": {
+                "activity_accuracy": {
+                    "avg": 56.056587091069844,
+                    "std": 0.3248660136317168,
+                    "text": "56.06+/-0.32"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.5366931918656057,
+                    "std": 0.3308273551524262,
+                    "text": "3.54+/-0.33"
+                },
+                "micro_f1": {
+                    "avg": 11.323866669024206,
+                    "std": 0.5226839131622555,
+                    "text": "11.32+/-0.52"
+                },
+                "macro_f1": {
+                    "avg": 9.016177857835975,
+                    "std": 0.5939616808580764,
+                    "text": "9.02+/-0.59"
+                },
+                "hamming_loss": {
+                    "avg": 5.2280839637161485,
+                    "std": 0.08872002609388005,
+                    "text": "5.23+/-0.09"
+                },
+                "loss": {
+                    "avg": 2.524691513004185,
+                    "std": 0.19131099441788854,
+                    "text": "2.52+/-0.19"
+                },
+                "repeats": [
+                    {
+                        "loss": 2.254170351382592,
+                        "activity_accuracy": 55.65870910698497,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 11.138411138411138,
+                        "macro_f1": 8.428278070988899,
+                        "hamming_loss": 5.3296001571863645,
+                        "seed": 39,
+                        "best_epoch": 32,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_5_seed39.pth"
+                    },
+                    {
+                        "loss": 2.6562682488236566,
+                        "activity_accuracy": 56.45446507515472,
+                        "exact_54_accuracy": 3.978779840848806,
+                        "micro_f1": 10.796915167095115,
+                        "macro_f1": 8.79054513226567,
+                        "hamming_loss": 5.113468906572355,
+                        "seed": 40,
+                        "best_epoch": 47,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_5_seed40.pth"
+                    },
+                    {
+                        "loss": 2.6636359388063062,
+                        "activity_accuracy": 56.05658709106985,
+                        "exact_54_accuracy": 3.4482758620689653,
+                        "micro_f1": 12.036273701566365,
+                        "macro_f1": 9.829710370253354,
+                        "hamming_loss": 5.241182827389724,
+                        "seed": 41,
+                        "best_epoch": 48,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_5_seed41.pth"
+                    }
+                ]
+            }
+        },
+        "both": {
+            "classroom": {
+                "activity_accuracy": {
+                    "avg": 56.50730411686587,
+                    "std": 0.17239665700970958,
+                    "text": "56.51+/-0.17"
+                },
+                "exact_54_accuracy": {
+                    "avg": 5.002213368747234,
+                    "std": 0.12520704403480246,
+                    "text": "5.00+/-0.13"
+                },
+                "micro_f1": {
+                    "avg": 3.1343584812591545,
+                    "std": 0.38188595842473255,
+                    "text": "3.13+/-0.38"
+                },
+                "macro_f1": {
+                    "avg": 2.947844423522092,
+                    "std": 0.35223610674303274,
+                    "text": "2.95+/-0.35"
+                },
+                "hamming_loss": {
+                    "avg": 4.964504123424,
+                    "std": 0.018549191708859793,
+                    "text": "4.96+/-0.02"
+                },
+                "loss": {
+                    "avg": 3.662617470533144,
+                    "std": 0.24542532870827707,
+                    "text": "3.66+/-0.25"
+                },
+                "repeats": [
+                    {
+                        "loss": 3.333524466194163,
+                        "activity_accuracy": 56.70650730411687,
+                        "exact_54_accuracy": 5.179282868525896,
+                        "micro_f1": 3.4615384615384617,
+                        "macro_f1": 3.0889153247266354,
+                        "hamming_loss": 4.938271604938271,
+                        "seed": 39,
+                        "best_epoch": 34,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_both_seed39.pth"
+                    },
+                    {
+                        "loss": 3.7316457345032914,
+                        "activity_accuracy": 56.5294378043382,
+                        "exact_54_accuracy": 4.913678618857902,
+                        "micro_f1": 3.3428844317096464,
+                        "macro_f1": 3.291047613809498,
+                        "hamming_loss": 4.9776203826668635,
+                        "seed": 40,
+                        "best_epoch": 50,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_both_seed40.pth"
+                    },
+                    {
+                        "loss": 3.922682210901977,
+                        "activity_accuracy": 56.28596724214254,
+                        "exact_54_accuracy": 4.913678618857902,
+                        "micro_f1": 2.598652550529355,
+                        "macro_f1": 2.4635703320301436,
+                        "hamming_loss": 4.9776203826668635,
+                        "seed": 41,
+                        "best_epoch": 50,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_classroom_both_seed41.pth"
+                    }
+                ]
+            },
+            "meeting_room": {
+                "activity_accuracy": {
+                    "avg": 56.46303674192121,
+                    "std": 0.10062108379066113,
+                    "text": "56.46+/-0.10"
+                },
+                "exact_54_accuracy": {
+                    "avg": 4.957945993802568,
+                    "std": 0.12520704403480246,
+                    "text": "4.96+/-0.13"
+                },
+                "micro_f1": {
+                    "avg": 1.6363993561194998,
+                    "std": 0.27458629192853035,
+                    "text": "1.64+/-0.27"
+                },
+                "macro_f1": {
+                    "avg": 1.5603958063474568,
+                    "std": 0.28054662923623214,
+                    "text": "1.56+/-0.28"
+                },
+                "hamming_loss": {
+                    "avg": 4.924335579492729,
+                    "std": 0.02453827414145156,
+                    "text": "4.92+/-0.02"
+                },
+                "loss": {
+                    "avg": 3.398475971829844,
+                    "std": 0.08838697801302435,
+                    "text": "3.40+/-0.09"
+                },
+                "repeats": [
+                    {
+                        "loss": 3.2736004522913795,
+                        "activity_accuracy": 56.48517042939354,
+                        "exact_54_accuracy": 5.046480743691899,
+                        "micro_f1": 1.948368241597662,
+                        "macro_f1": 1.8995722090653029,
+                        "hamming_loss": 4.950568097978456,
+                        "seed": 39,
+                        "best_epoch": 30,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_both_seed39.pth"
+                    },
+                    {
+                        "loss": 3.456121520375509,
+                        "activity_accuracy": 56.33023461708721,
+                        "exact_54_accuracy": 4.780876494023905,
+                        "micro_f1": 1.2801575578532742,
+                        "macro_f1": 1.2125405507040867,
+                        "hamming_loss": 4.9308937091141605,
+                        "seed": 40,
+                        "best_epoch": 33,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_both_seed40.pth"
+                    },
+                    {
+                        "loss": 3.4657059428226424,
+                        "activity_accuracy": 56.573705179282875,
+                        "exact_54_accuracy": 5.046480743691899,
+                        "micro_f1": 1.680672268907563,
+                        "macro_f1": 1.5690746592729812,
+                        "hamming_loss": 4.891544931385569,
+                        "seed": 41,
+                        "best_epoch": 33,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_meeting_room_both_seed41.pth"
+                    }
+                ]
+            },
+            "empty_room": {
+                "activity_accuracy": {
+                    "avg": 55.94658403423344,
+                    "std": 0.42357090436497824,
+                    "text": "55.95+/-0.42"
+                },
+                "exact_54_accuracy": {
+                    "avg": 5.223550243470562,
+                    "std": 0.12520704403480246,
+                    "text": "5.22+/-0.13"
+                },
+                "micro_f1": {
+                    "avg": 5.753991848360876,
+                    "std": 0.6458894078961949,
+                    "text": "5.75+/-0.65"
+                },
+                "macro_f1": {
+                    "avg": 4.715377285975764,
+                    "std": 0.5604476531129251,
+                    "text": "4.72+/-0.56"
+                },
+                "hamming_loss": {
+                    "avg": 5.098126014460676,
+                    "std": 0.045213654790345455,
+                    "text": "5.10+/-0.05"
+                },
+                "loss": {
+                    "avg": 3.2471880889561597,
+                    "std": 0.19987326070388603,
+                    "text": "3.25+/-0.20"
+                },
+                "repeats": [
+                    {
+                        "loss": 3.495559641089572,
+                        "activity_accuracy": 56.33023461708721,
+                        "exact_54_accuracy": 5.3120849933598935,
+                        "micro_f1": 5.265588914549654,
+                        "macro_f1": 4.562727597571651,
+                        "hamming_loss": 5.044021445083862,
+                        "seed": 39,
+                        "best_epoch": 41,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_both_seed39.pth"
+                    },
+                    {
+                        "loss": 3.006136323034684,
+                        "activity_accuracy": 56.153165117308546,
+                        "exact_54_accuracy": 5.3120849933598935,
+                        "micro_f1": 6.666666666666667,
+                        "macro_f1": 5.465256814143625,
+                        "hamming_loss": 5.095666715852639,
+                        "seed": 40,
+                        "best_epoch": 30,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_both_seed40.pth"
+                    },
+                    {
+                        "loss": 3.2398683027442234,
+                        "activity_accuracy": 55.35635236830456,
+                        "exact_54_accuracy": 5.046480743691899,
+                        "micro_f1": 5.329719963866306,
+                        "macro_f1": 4.118147446212017,
+                        "hamming_loss": 5.154689882445527,
+                        "seed": 41,
+                        "best_epoch": 35,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_holdout\\resnet_holdout_empty_room_both_seed41.pth"
+                    }
+                ]
+            }
+        }
+    }
+}

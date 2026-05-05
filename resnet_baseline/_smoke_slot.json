@@ -1,0 +1,161 @@
+{
+    "args": {
+        "annotation": "D:\\Deepak\\wifi_csi\\WiMANS-main\\dataset\\annotation.csv",
+        "data_dir": "D:\\Deepak\\wifi_csi\\dataset\\stft_top5_npy",
+        "band": "2.4",
+        "epochs": 1,
+        "repeat": 1,
+        "batch_size": 16,
+        "lr": 0.0001,
+        "weight_decay": 0.0001,
+        "threshold": 0.5,
+        "normalize": "log_standard",
+        "split_seed": 39,
+        "seed_start": 39,
+        "test_size": 0.2,
+        "val_size": 0.2,
+        "num_workers": 0,
+        "save_dir": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention",
+        "result_json": "resnet_baseline\\_smoke_slot.json"
+    },
+    "model": "slot_attention",
+    "results": {
+        "2.4": {
+            "classroom": {
+                "activity_accuracy": {
+                    "avg": 24.093722369584437,
+                    "std": 0.0,
+                    "text": "24.09+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 2.9177718832891246,
+                    "std": 0.0,
+                    "text": "2.92+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 11.504750681299255,
+                    "std": 0.0,
+                    "text": "11.50+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 11.476096822566632,
+                    "std": 0.0,
+                    "text": "11.48+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 59.01856763925729,
+                    "std": 0.0,
+                    "text": "59.02+/-0.00"
+                },
+                "loss": {
+                    "avg": 1.3511864019641826,
+                    "std": 0.0,
+                    "text": "1.35+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 1.3511864019641826,
+                        "activity_accuracy": 24.093722369584437,
+                        "exact_54_accuracy": 2.9177718832891246,
+                        "micro_f1": 11.504750681299255,
+                        "macro_f1": 11.476096822566632,
+                        "hamming_loss": 59.01856763925729,
+                        "seed": 39,
+                        "best_epoch": 1,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_classroom_2.4_seed39.pth"
+                    }
+                ]
+            },
+            "meeting_room": {
+                "activity_accuracy": {
+                    "avg": 8.709106984969054,
+                    "std": 0.0,
+                    "text": "8.71+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 0.2652519893899204,
+                    "std": 0.0,
+                    "text": "0.27+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 10.157164869029275,
+                    "std": 0.0,
+                    "text": "10.16+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 10.182687732880837,
+                    "std": 0.0,
+                    "text": "10.18+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 71.60330091364574,
+                    "std": 0.0,
+                    "text": "71.60+/-0.00"
+                },
+                "loss": {
+                    "avg": 1.3891888205505492,
+                    "std": 0.0,
+                    "text": "1.39+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 1.3891888205505492,
+                        "activity_accuracy": 8.709106984969054,
+                        "exact_54_accuracy": 0.2652519893899204,
+                        "micro_f1": 10.157164869029275,
+                        "macro_f1": 10.182687732880837,
+                        "hamming_loss": 71.60330091364574,
+                        "seed": 39,
+                        "best_epoch": 1,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_meeting_room_2.4_seed39.pth"
+                    }
+                ]
+            },
+            "empty_room": {
+                "activity_accuracy": {
+                    "avg": 23.82847038019452,
+                    "std": 0.0,
+                    "text": "23.83+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 1.3262599469496021,
+                    "std": 0.0,
+                    "text": "1.33+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 11.495278459365009,
+                    "std": 0.0,
+                    "text": "11.50+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 11.554484903529616,
+                    "std": 0.0,
+                    "text": "11.55+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 58.468415364967086,
+                    "std": 0.0,
+                    "text": "58.47+/-0.00"
+                },
+                "loss": {
+                    "avg": 1.3289867370767365,
+                    "std": 0.0,
+                    "text": "1.33+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 1.3289867370767365,
+                        "activity_accuracy": 23.82847038019452,
+                        "exact_54_accuracy": 1.3262599469496021,
+                        "micro_f1": 11.495278459365009,
+                        "macro_f1": 11.554484903529616,
+                        "hamming_loss": 58.468415364967086,
+                        "seed": 39,
+                        "best_epoch": 1,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_empty_room_2.4_seed39.pth"
+                    }
+                ]
+            }
+        }
+    }
+}

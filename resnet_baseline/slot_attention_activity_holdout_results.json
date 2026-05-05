@@ -1,0 +1,3217 @@
+{
+    "args": {
+        "annotation": "D:\\Deepak\\wifi_csi\\WiMANS-main\\dataset\\annotation.csv",
+        "data_dir": "D:\\Deepak\\wifi_csi\\dataset\\stft_top5_npy",
+        "band": "all",
+        "epochs": 50,
+        "repeat": 1,
+        "batch_size": 64,
+        "lr": 0.0001,
+        "weight_decay": 0.0001,
+        "threshold": 0.5,
+        "normalize": "log_standard",
+        "split_seed": 39,
+        "seed_start": 39,
+        "test_size": 0.2,
+        "val_size": 0.2,
+        "num_workers": 0,
+        "save_dir": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention",
+        "result_json": "D:\\Deepak\\wifi_csi\\resnet_baseline\\slot_attention_activity_holdout_results.json",
+        "result_excel": "D:\\Deepak\\wifi_csi\\resnet_baseline\\slot_attention_activity_holdout_analysis.xlsx"
+    },
+    "model": "slot_attention",
+    "results": {
+        "2.4": {
+            "classroom": {
+                "activity_accuracy": {
+                    "avg": 54.64190981432361,
+                    "std": 0.0,
+                    "text": "54.64+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 2.9177718832891246,
+                    "std": 0.0,
+                    "text": "2.92+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 2.9565217391304346,
+                    "std": 0.0,
+                    "text": "2.96+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 2.5820034007746884,
+                    "std": 0.0,
+                    "text": "2.58+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 5.4818744473916885,
+                    "std": 0.0,
+                    "text": "5.48+/-0.00"
+                },
+                "loss": {
+                    "avg": 4.357328118949101,
+                    "std": 0.0,
+                    "text": "4.36+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 4.357328118949101,
+                        "activity_accuracy": 54.64190981432361,
+                        "exact_54_accuracy": 2.9177718832891246,
+                        "micro_f1": 2.9565217391304346,
+                        "macro_f1": 2.5820034007746884,
+                        "hamming_loss": 5.4818744473916885,
+                        "activity_analysis": {
+                            "active_user_rows": 982,
+                            "absent_user_rows": 1280,
+                            "threshold_none_rate": 92.9266136162688,
+                            "threshold_multi_rate": 0.3536693191865605,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.08130081300813008,
+                                    "argmax_recall": 0.09803921568627451,
+                                    "argmax_f1": 0.08888888888888889,
+                                    "argmax_support": 102,
+                                    "threshold_precision": 0.1,
+                                    "threshold_recall": 0.00980392156862745,
+                                    "threshold_f1": 0.017857142857142856,
+                                    "threshold_support": 102
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.18,
+                                    "argmax_recall": 0.13533834586466165,
+                                    "argmax_f1": 0.15450643776824036,
+                                    "argmax_support": 133,
+                                    "threshold_precision": 0.17857142857142858,
+                                    "threshold_recall": 0.03759398496240601,
+                                    "threshold_f1": 0.062111801242236024,
+                                    "threshold_support": 133
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.09302325581395349,
+                                    "argmax_recall": 0.034482758620689655,
+                                    "argmax_f1": 0.050314465408805034,
+                                    "argmax_support": 116,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 116
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.08737864077669903,
+                                    "argmax_recall": 0.09574468085106383,
+                                    "argmax_f1": 0.09137055837563451,
+                                    "argmax_support": 94,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 94
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.09574468085106383,
+                                    "argmax_recall": 0.08411214953271028,
+                                    "argmax_f1": 0.08955223880597014,
+                                    "argmax_support": 107,
+                                    "threshold_precision": 0.09090909090909091,
+                                    "threshold_recall": 0.018691588785046728,
+                                    "threshold_f1": 0.031007751937984496,
+                                    "threshold_support": 107
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.10101010101010101,
+                                    "argmax_recall": 0.09090909090909091,
+                                    "argmax_f1": 0.09569377990430622,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.08695652173913043,
+                                    "threshold_recall": 0.01818181818181818,
+                                    "threshold_f1": 0.03007518796992481,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.15555555555555556,
+                                    "argmax_recall": 0.21212121212121213,
+                                    "argmax_f1": 0.1794871794871795,
+                                    "argmax_support": 99,
+                                    "threshold_precision": 0.16666666666666666,
+                                    "threshold_recall": 0.030303030303030304,
+                                    "threshold_f1": 0.05128205128205128,
+                                    "threshold_support": 99
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.11538461538461539,
+                                    "argmax_recall": 0.19090909090909092,
+                                    "argmax_f1": 0.14383561643835616,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.1,
+                                    "threshold_recall": 0.02727272727272727,
+                                    "threshold_f1": 0.04285714285714286,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.08737864077669903,
+                                    "argmax_recall": 0.08108108108108109,
+                                    "argmax_f1": 0.08411214953271028,
+                                    "argmax_support": 111,
+                                    "threshold_precision": 0.07692307692307693,
+                                    "threshold_recall": 0.009009009009009009,
+                                    "threshold_f1": 0.016129032258064516,
+                                    "threshold_support": 111
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    10,
+                                    11,
+                                    3,
+                                    15,
+                                    10,
+                                    5,
+                                    19,
+                                    17,
+                                    12
+                                ],
+                                [
+                                    23,
+                                    18,
+                                    9,
+                                    10,
+                                    17,
+                                    6,
+                                    20,
+                                    16,
+                                    14
+                                ],
+                                [
+                                    12,
+                                    11,
+                                    4,
+                                    12,
+                                    12,
+                                    14,
+                                    14,
+                                    24,
+                                    13
+                                ],
+                                [
+                                    12,
+                                    9,
+                                    4,
+                                    9,
+                                    11,
+                                    10,
+                                    12,
+                                    17,
+                                    10
+                                ],
+                                [
+                                    15,
+                                    7,
+                                    6,
+                                    8,
+                                    9,
+                                    17,
+                                    10,
+                                    29,
+                                    6
+                                ],
+                                [
+                                    8,
+                                    9,
+                                    7,
+                                    15,
+                                    13,
+                                    10,
+                                    12,
+                                    23,
+                                    13
+                                ],
+                                [
+                                    11,
+                                    8,
+                                    2,
+                                    9,
+                                    7,
+                                    9,
+                                    21,
+                                    19,
+                                    13
+                                ],
+                                [
+                                    20,
+                                    9,
+                                    2,
+                                    8,
+                                    8,
+                                    16,
+                                    13,
+                                    21,
+                                    13
+                                ],
+                                [
+                                    12,
+                                    18,
+                                    6,
+                                    17,
+                                    7,
+                                    12,
+                                    14,
+                                    16,
+                                    9
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.09803921568627451,
+                                    0.10784313725490197,
+                                    0.029411764705882353,
+                                    0.14705882352941177,
+                                    0.09803921568627451,
+                                    0.049019607843137254,
+                                    0.18627450980392157,
+                                    0.16666666666666666,
+                                    0.11764705882352941
+                                ],
+                                [
+                                    0.17293233082706766,
+                                    0.13533834586466165,
+                                    0.06766917293233082,
+                                    0.07518796992481203,
+                                    0.12781954887218044,
+                                    0.045112781954887216,
+                                    0.15037593984962405,
+                                    0.12030075187969924,
+                                    0.10526315789473684
+                                ],
+                                [
+                                    0.10344827586206896,
+                                    0.09482758620689655,
+                                    0.034482758620689655,
+                                    0.10344827586206896,
+                                    0.10344827586206896,
+                                    0.1206896551724138,
+                                    0.1206896551724138,
+                                    0.20689655172413793,
+                                    0.11206896551724138
+                                ],
+                                [
+                                    0.1276595744680851,
+                                    0.09574468085106383,
+                                    0.0425531914893617,
+                                    0.09574468085106383,
+                                    0.11702127659574468,
+                                    0.10638297872340426,
+                                    0.1276595744680851,
+                                    0.18085106382978725,
+                                    0.10638297872340426
+                                ],
+                                [
+                                    0.14018691588785046,
+                                    0.06542056074766354,
+                                    0.056074766355140186,
+                                    0.07476635514018691,
+                                    0.08411214953271028,
+                                    0.1588785046728972,
+                                    0.09345794392523364,
+                                    0.27102803738317754,
+                                    0.056074766355140186
+                                ],
+                                [
+                                    0.07272727272727272,
+                                    0.08181818181818182,
+                                    0.06363636363636363,
+                                    0.13636363636363635,
+                                    0.11818181818181818,
+                                    0.09090909090909091,
+                                    0.10909090909090909,
+                                    0.20909090909090908,
+                                    0.11818181818181818
+                                ],
+                                [
+                                    0.1111111111111111,
+                                    0.08080808080808081,
+                                    0.020202020202020204,
+                                    0.09090909090909091,
+                                    0.0707070707070707,
+                                    0.09090909090909091,
+                                    0.21212121212121213,
+                                    0.1919191919191919,
+                                    0.13131313131313133
+                                ],
+                                [
+                                    0.18181818181818182,
+                                    0.08181818181818182,
+                                    0.01818181818181818,
+                                    0.07272727272727272,
+                                    0.07272727272727272,
+                                    0.14545454545454545,
+                                    0.11818181818181818,
+                                    0.19090909090909092,
+                                    0.11818181818181818
+                                ],
+                                [
+                                    0.10810810810810811,
+                                    0.16216216216216217,
+                                    0.05405405405405406,
+                                    0.15315315315315314,
+                                    0.06306306306306306,
+                                    0.10810810810810811,
+                                    0.12612612612612611,
+                                    0.14414414414414414,
+                                    0.08108108108108109
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 19,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_classroom_2.4_seed39.pth"
+                    }
+                ]
+            },
+            "meeting_room": {
+                "activity_accuracy": {
+                    "avg": 56.49867374005305,
+                    "std": 0.0,
+                    "text": "56.50+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.183023872679045,
+                    "std": 0.0,
+                    "text": "3.18+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 0.0,
+                    "std": 0.0,
+                    "text": "0.00+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 0.0,
+                    "std": 0.0,
+                    "text": "0.00+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 4.843304843304843,
+                    "std": 0.0,
+                    "text": "4.84+/-0.00"
+                },
+                "loss": {
+                    "avg": 1.6465898774346874,
+                    "std": 0.0,
+                    "text": "1.65+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 1.6465898774346874,
+                        "activity_accuracy": 56.49867374005305,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 0.0,
+                        "macro_f1": 0.0,
+                        "hamming_loss": 4.843304843304843,
+                        "activity_analysis": {
+                            "active_user_rows": 982,
+                            "absent_user_rows": 1280,
+                            "threshold_none_rate": 99.82316534040672,
+                            "threshold_multi_rate": 0.0,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.10256410256410256,
+                                    "argmax_recall": 0.0392156862745098,
+                                    "argmax_f1": 0.05673758865248227,
+                                    "argmax_support": 102,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 102
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.0,
+                                    "argmax_recall": 0.0,
+                                    "argmax_f1": 0.0,
+                                    "argmax_support": 133,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 133
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.0,
+                                    "argmax_recall": 0.0,
+                                    "argmax_f1": 0.0,
+                                    "argmax_support": 116,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 116
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.05405405405405406,
+                                    "argmax_recall": 0.02127659574468085,
+                                    "argmax_f1": 0.030534351145038167,
+                                    "argmax_support": 94,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 94
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.0,
+                                    "argmax_recall": 0.0,
+                                    "argmax_f1": 0.0,
+                                    "argmax_support": 107,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 107
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.12131147540983607,
+                                    "argmax_recall": 0.6727272727272727,
+                                    "argmax_f1": 0.20555555555555555,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.1004566210045662,
+                                    "argmax_recall": 0.2222222222222222,
+                                    "argmax_f1": 0.13836477987421383,
+                                    "argmax_support": 99,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 99
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.09090909090909091,
+                                    "argmax_recall": 0.06363636363636363,
+                                    "argmax_f1": 0.0748663101604278,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.0,
+                                    "argmax_recall": 0.0,
+                                    "argmax_f1": 0.0,
+                                    "argmax_support": 111,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 111
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    4,
+                                    0,
+                                    0,
+                                    3,
+                                    0,
+                                    64,
+                                    22,
+                                    9,
+                                    0
+                                ],
+                                [
+                                    5,
+                                    0,
+                                    0,
+                                    5,
+                                    0,
+                                    81,
+                                    35,
+                                    7,
+                                    0
+                                ],
+                                [
+                                    3,
+                                    0,
+                                    0,
+                                    6,
+                                    0,
+                                    72,
+                                    26,
+                                    9,
+                                    0
+                                ],
+                                [
+                                    5,
+                                    0,
+                                    0,
+                                    2,
+                                    0,
+                                    54,
+                                    20,
+                                    13,
+                                    0
+                                ],
+                                [
+                                    3,
+                                    0,
+                                    0,
+                                    4,
+                                    0,
+                                    64,
+                                    26,
+                                    10,
+                                    0
+                                ],
+                                [
+                                    2,
+                                    0,
+                                    0,
+                                    6,
+                                    0,
+                                    74,
+                                    20,
+                                    8,
+                                    0
+                                ],
+                                [
+                                    8,
+                                    0,
+                                    0,
+                                    4,
+                                    0,
+                                    58,
+                                    22,
+                                    7,
+                                    0
+                                ],
+                                [
+                                    5,
+                                    0,
+                                    0,
+                                    3,
+                                    0,
+                                    74,
+                                    21,
+                                    7,
+                                    0
+                                ],
+                                [
+                                    4,
+                                    0,
+                                    0,
+                                    4,
+                                    0,
+                                    69,
+                                    27,
+                                    7,
+                                    0
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.0392156862745098,
+                                    0.0,
+                                    0.0,
+                                    0.029411764705882353,
+                                    0.0,
+                                    0.6274509803921569,
+                                    0.21568627450980393,
+                                    0.08823529411764706,
+                                    0.0
+                                ],
+                                [
+                                    0.03759398496240601,
+                                    0.0,
+                                    0.0,
+                                    0.03759398496240601,
+                                    0.0,
+                                    0.6090225563909775,
+                                    0.2631578947368421,
+                                    0.05263157894736842,
+                                    0.0
+                                ],
+                                [
+                                    0.02586206896551724,
+                                    0.0,
+                                    0.0,
+                                    0.05172413793103448,
+                                    0.0,
+                                    0.6206896551724138,
+                                    0.22413793103448276,
+                                    0.07758620689655173,
+                                    0.0
+                                ],
+                                [
+                                    0.05319148936170213,
+                                    0.0,
+                                    0.0,
+                                    0.02127659574468085,
+                                    0.0,
+                                    0.574468085106383,
+                                    0.2127659574468085,
+                                    0.13829787234042554,
+                                    0.0
+                                ],
+                                [
+                                    0.028037383177570093,
+                                    0.0,
+                                    0.0,
+                                    0.037383177570093455,
+                                    0.0,
+                                    0.5981308411214953,
+                                    0.24299065420560748,
+                                    0.09345794392523364,
+                                    0.0
+                                ],
+                                [
+                                    0.01818181818181818,
+                                    0.0,
+                                    0.0,
+                                    0.05454545454545454,
+                                    0.0,
+                                    0.6727272727272727,
+                                    0.18181818181818182,
+                                    0.07272727272727272,
+                                    0.0
+                                ],
+                                [
+                                    0.08080808080808081,
+                                    0.0,
+                                    0.0,
+                                    0.04040404040404041,
+                                    0.0,
+                                    0.5858585858585859,
+                                    0.2222222222222222,
+                                    0.0707070707070707,
+                                    0.0
+                                ],
+                                [
+                                    0.045454545454545456,
+                                    0.0,
+                                    0.0,
+                                    0.02727272727272727,
+                                    0.0,
+                                    0.6727272727272727,
+                                    0.19090909090909092,
+                                    0.06363636363636363,
+                                    0.0
+                                ],
+                                [
+                                    0.036036036036036036,
+                                    0.0,
+                                    0.0,
+                                    0.036036036036036036,
+                                    0.0,
+                                    0.6216216216216216,
+                                    0.24324324324324326,
+                                    0.06306306306306306,
+                                    0.0
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 2,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_meeting_room_2.4_seed39.pth"
+                    }
+                ]
+            },
+            "empty_room": {
+                "activity_accuracy": {
+                    "avg": 54.42086648983201,
+                    "std": 0.0,
+                    "text": "54.42+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.183023872679045,
+                    "std": 0.0,
+                    "text": "3.18+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 1.2422360248447204,
+                    "std": 0.0,
+                    "text": "1.24+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 1.189751856503276,
+                    "std": 0.0,
+                    "text": "1.19+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 5.467138225758916,
+                    "std": 0.0,
+                    "text": "5.47+/-0.00"
+                },
+                "loss": {
+                    "avg": 6.076335202477655,
+                    "std": 0.0,
+                    "text": "6.08+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 6.076335202477655,
+                        "activity_accuracy": 54.42086648983201,
+                        "exact_54_accuracy": 3.183023872679045,
+                        "micro_f1": 1.2422360248447204,
+                        "macro_f1": 1.189751856503276,
+                        "hamming_loss": 5.467138225758916,
+                        "activity_analysis": {
+                            "active_user_rows": 982,
+                            "absent_user_rows": 1280,
+                            "threshold_none_rate": 93.85499557913352,
+                            "threshold_multi_rate": 0.2652519893899204,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.08391608391608392,
+                                    "argmax_recall": 0.11764705882352941,
+                                    "argmax_f1": 0.09795918367346938,
+                                    "argmax_support": 102,
+                                    "threshold_precision": 0.043478260869565216,
+                                    "threshold_recall": 0.00980392156862745,
+                                    "threshold_f1": 0.016,
+                                    "threshold_support": 102
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.1564625850340136,
+                                    "argmax_recall": 0.17293233082706766,
+                                    "argmax_f1": 0.16428571428571428,
+                                    "argmax_support": 133,
+                                    "threshold_precision": 0.05555555555555555,
+                                    "threshold_recall": 0.007518796992481203,
+                                    "threshold_f1": 0.013245033112582781,
+                                    "threshold_support": 133
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.12280701754385964,
+                                    "argmax_recall": 0.0603448275862069,
+                                    "argmax_f1": 0.08092485549132948,
+                                    "argmax_support": 116,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 116
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.09223300970873786,
+                                    "argmax_recall": 0.20212765957446807,
+                                    "argmax_f1": 0.12666666666666668,
+                                    "argmax_support": 94,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 94
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.14545454545454545,
+                                    "argmax_recall": 0.07476635514018691,
+                                    "argmax_f1": 0.09876543209876543,
+                                    "argmax_support": 107,
+                                    "threshold_precision": 0.125,
+                                    "threshold_recall": 0.018691588785046728,
+                                    "threshold_f1": 0.032520325203252036,
+                                    "threshold_support": 107
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.12264150943396226,
+                                    "argmax_recall": 0.11818181818181818,
+                                    "argmax_f1": 0.12037037037037036,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.09923664122137404,
+                                    "argmax_recall": 0.13131313131313133,
+                                    "argmax_f1": 0.11304347826086956,
+                                    "argmax_support": 99,
+                                    "threshold_precision": 0.0,
+                                    "threshold_recall": 0.0,
+                                    "threshold_f1": 0.0,
+                                    "threshold_support": 99
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.09302325581395349,
+                                    "argmax_recall": 0.07272727272727272,
+                                    "argmax_f1": 0.08163265306122448,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.125,
+                                    "threshold_recall": 0.01818181818181818,
+                                    "threshold_f1": 0.031746031746031744,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.058823529411764705,
+                                    "argmax_recall": 0.02702702702702703,
+                                    "argmax_f1": 0.037037037037037035,
+                                    "argmax_support": 111,
+                                    "threshold_precision": 0.05,
+                                    "threshold_recall": 0.009009009009009009,
+                                    "threshold_f1": 0.015267175572519083,
+                                    "threshold_support": 111
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    12,
+                                    17,
+                                    8,
+                                    21,
+                                    6,
+                                    12,
+                                    9,
+                                    13,
+                                    4
+                                ],
+                                [
+                                    26,
+                                    23,
+                                    6,
+                                    25,
+                                    4,
+                                    16,
+                                    19,
+                                    5,
+                                    9
+                                ],
+                                [
+                                    15,
+                                    20,
+                                    7,
+                                    23,
+                                    6,
+                                    8,
+                                    18,
+                                    6,
+                                    13
+                                ],
+                                [
+                                    12,
+                                    17,
+                                    3,
+                                    19,
+                                    9,
+                                    7,
+                                    15,
+                                    7,
+                                    5
+                                ],
+                                [
+                                    17,
+                                    17,
+                                    9,
+                                    16,
+                                    8,
+                                    14,
+                                    14,
+                                    9,
+                                    3
+                                ],
+                                [
+                                    16,
+                                    17,
+                                    8,
+                                    21,
+                                    7,
+                                    13,
+                                    12,
+                                    11,
+                                    5
+                                ],
+                                [
+                                    16,
+                                    11,
+                                    5,
+                                    25,
+                                    6,
+                                    5,
+                                    13,
+                                    14,
+                                    4
+                                ],
+                                [
+                                    17,
+                                    12,
+                                    4,
+                                    33,
+                                    4,
+                                    16,
+                                    11,
+                                    8,
+                                    5
+                                ],
+                                [
+                                    12,
+                                    13,
+                                    7,
+                                    23,
+                                    5,
+                                    15,
+                                    20,
+                                    13,
+                                    3
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.11764705882352941,
+                                    0.16666666666666666,
+                                    0.0784313725490196,
+                                    0.20588235294117646,
+                                    0.058823529411764705,
+                                    0.11764705882352941,
+                                    0.08823529411764706,
+                                    0.12745098039215685,
+                                    0.0392156862745098
+                                ],
+                                [
+                                    0.19548872180451127,
+                                    0.17293233082706766,
+                                    0.045112781954887216,
+                                    0.18796992481203006,
+                                    0.03007518796992481,
+                                    0.12030075187969924,
+                                    0.14285714285714285,
+                                    0.03759398496240601,
+                                    0.06766917293233082
+                                ],
+                                [
+                                    0.12931034482758622,
+                                    0.1724137931034483,
+                                    0.0603448275862069,
+                                    0.19827586206896552,
+                                    0.05172413793103448,
+                                    0.06896551724137931,
+                                    0.15517241379310345,
+                                    0.05172413793103448,
+                                    0.11206896551724138
+                                ],
+                                [
+                                    0.1276595744680851,
+                                    0.18085106382978725,
+                                    0.031914893617021274,
+                                    0.20212765957446807,
+                                    0.09574468085106383,
+                                    0.07446808510638298,
+                                    0.1595744680851064,
+                                    0.07446808510638298,
+                                    0.05319148936170213
+                                ],
+                                [
+                                    0.1588785046728972,
+                                    0.1588785046728972,
+                                    0.08411214953271028,
+                                    0.14953271028037382,
+                                    0.07476635514018691,
+                                    0.1308411214953271,
+                                    0.1308411214953271,
+                                    0.08411214953271028,
+                                    0.028037383177570093
+                                ],
+                                [
+                                    0.14545454545454545,
+                                    0.15454545454545454,
+                                    0.07272727272727272,
+                                    0.19090909090909092,
+                                    0.06363636363636363,
+                                    0.11818181818181818,
+                                    0.10909090909090909,
+                                    0.1,
+                                    0.045454545454545456
+                                ],
+                                [
+                                    0.16161616161616163,
+                                    0.1111111111111111,
+                                    0.050505050505050504,
+                                    0.25252525252525254,
+                                    0.06060606060606061,
+                                    0.050505050505050504,
+                                    0.13131313131313133,
+                                    0.1414141414141414,
+                                    0.04040404040404041
+                                ],
+                                [
+                                    0.15454545454545454,
+                                    0.10909090909090909,
+                                    0.03636363636363636,
+                                    0.3,
+                                    0.03636363636363636,
+                                    0.14545454545454545,
+                                    0.1,
+                                    0.07272727272727272,
+                                    0.045454545454545456
+                                ],
+                                [
+                                    0.10810810810810811,
+                                    0.11711711711711711,
+                                    0.06306306306306306,
+                                    0.2072072072072072,
+                                    0.04504504504504504,
+                                    0.13513513513513514,
+                                    0.18018018018018017,
+                                    0.11711711711711711,
+                                    0.02702702702702703
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 50,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_empty_room_2.4_seed39.pth"
+                    }
+                ]
+            }
+        },
+        "5": {
+            "classroom": {
+                "activity_accuracy": {
+                    "avg": 52.210433244916,
+                    "std": 0.0,
+                    "text": "52.21+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 5.305039787798409,
+                    "std": 0.0,
+                    "text": "5.31+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 12.873862158647595,
+                    "std": 0.0,
+                    "text": "12.87+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 11.49250847738573,
+                    "std": 0.0,
+                    "text": "11.49+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 6.582178995972098,
+                    "std": 0.0,
+                    "text": "6.58+/-0.00"
+                },
+                "loss": {
+                    "avg": 4.5089017073735,
+                    "std": 0.0,
+                    "text": "4.51+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 4.5089017073735,
+                        "activity_accuracy": 52.210433244916,
+                        "exact_54_accuracy": 5.305039787798409,
+                        "micro_f1": 12.873862158647595,
+                        "macro_f1": 11.49250847738573,
+                        "hamming_loss": 6.582178995972098,
+                        "activity_analysis": {
+                            "active_user_rows": 982,
+                            "absent_user_rows": 1280,
+                            "threshold_none_rate": 77.80725022104332,
+                            "threshold_multi_rate": 2.3872679045092835,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.35135135135135137,
+                                    "argmax_recall": 0.2549019607843137,
+                                    "argmax_f1": 0.29545454545454547,
+                                    "argmax_support": 102,
+                                    "threshold_precision": 0.1875,
+                                    "threshold_recall": 0.029411764705882353,
+                                    "threshold_f1": 0.05084745762711865,
+                                    "threshold_support": 102
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.4,
+                                    "argmax_recall": 0.40601503759398494,
+                                    "argmax_f1": 0.40298507462686567,
+                                    "argmax_support": 133,
+                                    "threshold_precision": 0.24705882352941178,
+                                    "threshold_recall": 0.15789473684210525,
+                                    "threshold_f1": 0.1926605504587156,
+                                    "threshold_support": 133
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.22641509433962265,
+                                    "argmax_recall": 0.10344827586206896,
+                                    "argmax_f1": 0.14201183431952663,
+                                    "argmax_support": 116,
+                                    "threshold_precision": 0.13333333333333333,
+                                    "threshold_recall": 0.05172413793103448,
+                                    "threshold_f1": 0.07453416149068323,
+                                    "threshold_support": 116
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.19411764705882353,
+                                    "argmax_recall": 0.35106382978723405,
+                                    "argmax_f1": 0.25,
+                                    "argmax_support": 94,
+                                    "threshold_precision": 0.15789473684210525,
+                                    "threshold_recall": 0.06382978723404255,
+                                    "threshold_f1": 0.09090909090909091,
+                                    "threshold_support": 94
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.24,
+                                    "argmax_recall": 0.16822429906542055,
+                                    "argmax_f1": 0.1978021978021978,
+                                    "argmax_support": 107,
+                                    "threshold_precision": 0.16279069767441862,
+                                    "threshold_recall": 0.06542056074766354,
+                                    "threshold_f1": 0.09333333333333334,
+                                    "threshold_support": 107
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.21951219512195122,
+                                    "argmax_recall": 0.32727272727272727,
+                                    "argmax_f1": 0.26277372262773724,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.136,
+                                    "threshold_recall": 0.15454545454545454,
+                                    "threshold_f1": 0.14468085106382977,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.23469387755102042,
+                                    "argmax_recall": 0.23232323232323232,
+                                    "argmax_f1": 0.233502538071066,
+                                    "argmax_support": 99,
+                                    "threshold_precision": 0.14084507042253522,
+                                    "threshold_recall": 0.10101010101010101,
+                                    "threshold_f1": 0.11764705882352941,
+                                    "threshold_support": 99
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.25252525252525254,
+                                    "argmax_recall": 0.22727272727272727,
+                                    "argmax_f1": 0.23923444976076555,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.2,
+                                    "threshold_recall": 0.11818181818181818,
+                                    "threshold_f1": 0.14857142857142858,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.2631578947368421,
+                                    "argmax_recall": 0.2702702702702703,
+                                    "argmax_f1": 0.26666666666666666,
+                                    "argmax_support": 111,
+                                    "threshold_precision": 0.23529411764705882,
+                                    "threshold_recall": 0.14414414414414414,
+                                    "threshold_f1": 0.1787709497206704,
+                                    "threshold_support": 111
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    26,
+                                    17,
+                                    2,
+                                    17,
+                                    4,
+                                    7,
+                                    4,
+                                    7,
+                                    18
+                                ],
+                                [
+                                    9,
+                                    54,
+                                    9,
+                                    29,
+                                    9,
+                                    10,
+                                    3,
+                                    1,
+                                    9
+                                ],
+                                [
+                                    6,
+                                    26,
+                                    12,
+                                    27,
+                                    12,
+                                    16,
+                                    7,
+                                    6,
+                                    4
+                                ],
+                                [
+                                    3,
+                                    13,
+                                    10,
+                                    33,
+                                    7,
+                                    15,
+                                    4,
+                                    6,
+                                    3
+                                ],
+                                [
+                                    5,
+                                    5,
+                                    9,
+                                    22,
+                                    18,
+                                    27,
+                                    8,
+                                    5,
+                                    8
+                                ],
+                                [
+                                    3,
+                                    5,
+                                    4,
+                                    17,
+                                    10,
+                                    36,
+                                    15,
+                                    12,
+                                    8
+                                ],
+                                [
+                                    5,
+                                    3,
+                                    3,
+                                    11,
+                                    5,
+                                    20,
+                                    23,
+                                    19,
+                                    10
+                                ],
+                                [
+                                    5,
+                                    4,
+                                    1,
+                                    6,
+                                    4,
+                                    18,
+                                    23,
+                                    25,
+                                    24
+                                ],
+                                [
+                                    12,
+                                    8,
+                                    3,
+                                    8,
+                                    6,
+                                    15,
+                                    11,
+                                    18,
+                                    30
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.2549019607843137,
+                                    0.16666666666666666,
+                                    0.0196078431372549,
+                                    0.16666666666666666,
+                                    0.0392156862745098,
+                                    0.06862745098039216,
+                                    0.0392156862745098,
+                                    0.06862745098039216,
+                                    0.17647058823529413
+                                ],
+                                [
+                                    0.06766917293233082,
+                                    0.40601503759398494,
+                                    0.06766917293233082,
+                                    0.21804511278195488,
+                                    0.06766917293233082,
+                                    0.07518796992481203,
+                                    0.022556390977443608,
+                                    0.007518796992481203,
+                                    0.06766917293233082
+                                ],
+                                [
+                                    0.05172413793103448,
+                                    0.22413793103448276,
+                                    0.10344827586206896,
+                                    0.23275862068965517,
+                                    0.10344827586206896,
+                                    0.13793103448275862,
+                                    0.0603448275862069,
+                                    0.05172413793103448,
+                                    0.034482758620689655
+                                ],
+                                [
+                                    0.031914893617021274,
+                                    0.13829787234042554,
+                                    0.10638297872340426,
+                                    0.35106382978723405,
+                                    0.07446808510638298,
+                                    0.1595744680851064,
+                                    0.0425531914893617,
+                                    0.06382978723404255,
+                                    0.031914893617021274
+                                ],
+                                [
+                                    0.04672897196261682,
+                                    0.04672897196261682,
+                                    0.08411214953271028,
+                                    0.205607476635514,
+                                    0.16822429906542055,
+                                    0.2523364485981308,
+                                    0.07476635514018691,
+                                    0.04672897196261682,
+                                    0.07476635514018691
+                                ],
+                                [
+                                    0.02727272727272727,
+                                    0.045454545454545456,
+                                    0.03636363636363636,
+                                    0.15454545454545454,
+                                    0.09090909090909091,
+                                    0.32727272727272727,
+                                    0.13636363636363635,
+                                    0.10909090909090909,
+                                    0.07272727272727272
+                                ],
+                                [
+                                    0.050505050505050504,
+                                    0.030303030303030304,
+                                    0.030303030303030304,
+                                    0.1111111111111111,
+                                    0.050505050505050504,
+                                    0.20202020202020202,
+                                    0.23232323232323232,
+                                    0.1919191919191919,
+                                    0.10101010101010101
+                                ],
+                                [
+                                    0.045454545454545456,
+                                    0.03636363636363636,
+                                    0.00909090909090909,
+                                    0.05454545454545454,
+                                    0.03636363636363636,
+                                    0.16363636363636364,
+                                    0.20909090909090908,
+                                    0.22727272727272727,
+                                    0.21818181818181817
+                                ],
+                                [
+                                    0.10810810810810811,
+                                    0.07207207207207207,
+                                    0.02702702702702703,
+                                    0.07207207207207207,
+                                    0.05405405405405406,
+                                    0.13513513513513514,
+                                    0.0990990990990991,
+                                    0.16216216216216217,
+                                    0.2702702702702703
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 48,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_classroom_5_seed39.pth"
+                    }
+                ]
+            },
+            "meeting_room": {
+                "activity_accuracy": {
+                    "avg": 49.778956675508404,
+                    "std": 0.0,
+                    "text": "49.78+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.978779840848806,
+                    "std": 0.0,
+                    "text": "3.98+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 16.48059542796385,
+                    "std": 0.0,
+                    "text": "16.48+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 14.937667827908097,
+                    "std": 0.0,
+                    "text": "14.94+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 7.7168680616956475,
+                    "std": 0.0,
+                    "text": "7.72+/-0.00"
+                },
+                "loss": {
+                    "avg": 4.1971951669343905,
+                    "std": 0.0,
+                    "text": "4.20+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 4.1971951669343905,
+                        "activity_accuracy": 49.778956675508404,
+                        "exact_54_accuracy": 3.978779840848806,
+                        "micro_f1": 16.48059542796385,
+                        "macro_f1": 14.937667827908097,
+                        "hamming_loss": 7.7168680616956475,
+                        "activity_analysis": {
+                            "active_user_rows": 982,
+                            "absent_user_rows": 1280,
+                            "threshold_none_rate": 65.51724137931035,
+                            "threshold_multi_rate": 5.260831122900089,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.3473684210526316,
+                                    "argmax_recall": 0.3235294117647059,
+                                    "argmax_f1": 0.3350253807106599,
+                                    "argmax_support": 102,
+                                    "threshold_precision": 0.18181818181818182,
+                                    "threshold_recall": 0.0784313725490196,
+                                    "threshold_f1": 0.1095890410958904,
+                                    "threshold_support": 102
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.36619718309859156,
+                                    "argmax_recall": 0.39097744360902253,
+                                    "argmax_f1": 0.3781818181818182,
+                                    "argmax_support": 133,
+                                    "threshold_precision": 0.29850746268656714,
+                                    "threshold_recall": 0.3007518796992481,
+                                    "threshold_f1": 0.299625468164794,
+                                    "threshold_support": 133
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.22340425531914893,
+                                    "argmax_recall": 0.1810344827586207,
+                                    "argmax_f1": 0.2,
+                                    "argmax_support": 116,
+                                    "threshold_precision": 0.16304347826086957,
+                                    "threshold_recall": 0.12931034482758622,
+                                    "threshold_f1": 0.14423076923076922,
+                                    "threshold_support": 116
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.23469387755102042,
+                                    "argmax_recall": 0.24468085106382978,
+                                    "argmax_f1": 0.23958333333333334,
+                                    "argmax_support": 94,
+                                    "threshold_precision": 0.12987012987012986,
+                                    "threshold_recall": 0.10638297872340426,
+                                    "threshold_f1": 0.11695906432748537,
+                                    "threshold_support": 94
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.16666666666666666,
+                                    "argmax_recall": 0.14953271028037382,
+                                    "argmax_f1": 0.15763546798029557,
+                                    "argmax_support": 107,
+                                    "threshold_precision": 0.0990990990990991,
+                                    "threshold_recall": 0.102803738317757,
+                                    "threshold_f1": 0.10091743119266056,
+                                    "threshold_support": 107
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.16666666666666666,
+                                    "argmax_recall": 0.19090909090909092,
+                                    "argmax_f1": 0.17796610169491525,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.13157894736842105,
+                                    "threshold_recall": 0.13636363636363635,
+                                    "threshold_f1": 0.13392857142857142,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.22900763358778625,
+                                    "argmax_recall": 0.30303030303030304,
+                                    "argmax_f1": 0.2608695652173913,
+                                    "argmax_support": 99,
+                                    "threshold_precision": 0.14018691588785046,
+                                    "threshold_recall": 0.15151515151515152,
+                                    "threshold_f1": 0.14563106796116504,
+                                    "threshold_support": 99
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.22916666666666666,
+                                    "argmax_recall": 0.2,
+                                    "argmax_f1": 0.21359223300970873,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.2087912087912088,
+                                    "threshold_recall": 0.17272727272727273,
+                                    "threshold_f1": 0.1890547263681592,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.2980769230769231,
+                                    "argmax_recall": 0.27927927927927926,
+                                    "argmax_f1": 0.28837209302325584,
+                                    "argmax_support": 111,
+                                    "threshold_precision": 0.17054263565891473,
+                                    "threshold_recall": 0.1981981981981982,
+                                    "threshold_f1": 0.18333333333333332,
+                                    "threshold_support": 111
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    33,
+                                    19,
+                                    9,
+                                    4,
+                                    7,
+                                    7,
+                                    5,
+                                    2,
+                                    16
+                                ],
+                                [
+                                    20,
+                                    52,
+                                    14,
+                                    9,
+                                    9,
+                                    14,
+                                    5,
+                                    5,
+                                    5
+                                ],
+                                [
+                                    4,
+                                    21,
+                                    21,
+                                    21,
+                                    14,
+                                    14,
+                                    11,
+                                    9,
+                                    1
+                                ],
+                                [
+                                    3,
+                                    11,
+                                    16,
+                                    23,
+                                    11,
+                                    13,
+                                    4,
+                                    7,
+                                    6
+                                ],
+                                [
+                                    7,
+                                    13,
+                                    5,
+                                    11,
+                                    16,
+                                    28,
+                                    13,
+                                    9,
+                                    5
+                                ],
+                                [
+                                    7,
+                                    7,
+                                    5,
+                                    11,
+                                    20,
+                                    21,
+                                    19,
+                                    11,
+                                    9
+                                ],
+                                [
+                                    6,
+                                    3,
+                                    7,
+                                    10,
+                                    8,
+                                    14,
+                                    30,
+                                    12,
+                                    9
+                                ],
+                                [
+                                    8,
+                                    4,
+                                    11,
+                                    7,
+                                    5,
+                                    7,
+                                    24,
+                                    22,
+                                    22
+                                ],
+                                [
+                                    7,
+                                    12,
+                                    6,
+                                    2,
+                                    6,
+                                    8,
+                                    20,
+                                    19,
+                                    31
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.3235294117647059,
+                                    0.18627450980392157,
+                                    0.08823529411764706,
+                                    0.0392156862745098,
+                                    0.06862745098039216,
+                                    0.06862745098039216,
+                                    0.049019607843137254,
+                                    0.0196078431372549,
+                                    0.1568627450980392
+                                ],
+                                [
+                                    0.15037593984962405,
+                                    0.39097744360902253,
+                                    0.10526315789473684,
+                                    0.06766917293233082,
+                                    0.06766917293233082,
+                                    0.10526315789473684,
+                                    0.03759398496240601,
+                                    0.03759398496240601,
+                                    0.03759398496240601
+                                ],
+                                [
+                                    0.034482758620689655,
+                                    0.1810344827586207,
+                                    0.1810344827586207,
+                                    0.1810344827586207,
+                                    0.1206896551724138,
+                                    0.1206896551724138,
+                                    0.09482758620689655,
+                                    0.07758620689655173,
+                                    0.008620689655172414
+                                ],
+                                [
+                                    0.031914893617021274,
+                                    0.11702127659574468,
+                                    0.1702127659574468,
+                                    0.24468085106382978,
+                                    0.11702127659574468,
+                                    0.13829787234042554,
+                                    0.0425531914893617,
+                                    0.07446808510638298,
+                                    0.06382978723404255
+                                ],
+                                [
+                                    0.06542056074766354,
+                                    0.12149532710280374,
+                                    0.04672897196261682,
+                                    0.102803738317757,
+                                    0.14953271028037382,
+                                    0.2616822429906542,
+                                    0.12149532710280374,
+                                    0.08411214953271028,
+                                    0.04672897196261682
+                                ],
+                                [
+                                    0.06363636363636363,
+                                    0.06363636363636363,
+                                    0.045454545454545456,
+                                    0.1,
+                                    0.18181818181818182,
+                                    0.19090909090909092,
+                                    0.17272727272727273,
+                                    0.1,
+                                    0.08181818181818182
+                                ],
+                                [
+                                    0.06060606060606061,
+                                    0.030303030303030304,
+                                    0.0707070707070707,
+                                    0.10101010101010101,
+                                    0.08080808080808081,
+                                    0.1414141414141414,
+                                    0.30303030303030304,
+                                    0.12121212121212122,
+                                    0.09090909090909091
+                                ],
+                                [
+                                    0.07272727272727272,
+                                    0.03636363636363636,
+                                    0.1,
+                                    0.06363636363636363,
+                                    0.045454545454545456,
+                                    0.06363636363636363,
+                                    0.21818181818181817,
+                                    0.2,
+                                    0.2
+                                ],
+                                [
+                                    0.06306306306306306,
+                                    0.10810810810810811,
+                                    0.05405405405405406,
+                                    0.018018018018018018,
+                                    0.05405405405405406,
+                                    0.07207207207207207,
+                                    0.18018018018018017,
+                                    0.17117117117117117,
+                                    0.27927927927927926
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 48,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_meeting_room_5_seed39.pth"
+                    }
+                ]
+            },
+            "empty_room": {
+                "activity_accuracy": {
+                    "avg": 52.96198054818745,
+                    "std": 0.0,
+                    "text": "52.96+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.7135278514588856,
+                    "std": 0.0,
+                    "text": "3.71+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 16.36017755231452,
+                    "std": 0.0,
+                    "text": "16.36+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 14.438235048818882,
+                    "std": 0.0,
+                    "text": "14.44+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 6.479025444542685,
+                    "std": 0.0,
+                    "text": "6.48+/-0.00"
+                },
+                "loss": {
+                    "avg": 4.406053837793891,
+                    "std": 0.0,
+                    "text": "4.41+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 4.406053837793891,
+                        "activity_accuracy": 52.96198054818745,
+                        "exact_54_accuracy": 3.7135278514588856,
+                        "micro_f1": 16.36017755231452,
+                        "macro_f1": 14.438235048818882,
+                        "hamming_loss": 6.479025444542685,
+                        "activity_analysis": {
+                            "active_user_rows": 982,
+                            "absent_user_rows": 1280,
+                            "threshold_none_rate": 76.52519893899205,
+                            "threshold_multi_rate": 2.829354553492484,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.3854166666666667,
+                                    "argmax_recall": 0.3627450980392157,
+                                    "argmax_f1": 0.37373737373737376,
+                                    "argmax_support": 102,
+                                    "threshold_precision": 0.35,
+                                    "threshold_recall": 0.06862745098039216,
+                                    "threshold_f1": 0.11475409836065574,
+                                    "threshold_support": 102
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.45985401459854014,
+                                    "argmax_recall": 0.47368421052631576,
+                                    "argmax_f1": 0.4666666666666667,
+                                    "argmax_support": 133,
+                                    "threshold_precision": 0.31896551724137934,
+                                    "threshold_recall": 0.2781954887218045,
+                                    "threshold_f1": 0.2971887550200803,
+                                    "threshold_support": 133
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.21739130434782608,
+                                    "argmax_recall": 0.21551724137931033,
+                                    "argmax_f1": 0.21645021645021645,
+                                    "argmax_support": 116,
+                                    "threshold_precision": 0.20967741935483872,
+                                    "threshold_recall": 0.11206896551724138,
+                                    "threshold_f1": 0.14606741573033707,
+                                    "threshold_support": 116
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.17204301075268819,
+                                    "argmax_recall": 0.1702127659574468,
+                                    "argmax_f1": 0.1711229946524064,
+                                    "argmax_support": 94,
+                                    "threshold_precision": 0.0851063829787234,
+                                    "threshold_recall": 0.0425531914893617,
+                                    "threshold_f1": 0.05673758865248227,
+                                    "threshold_support": 94
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.18823529411764706,
+                                    "argmax_recall": 0.14953271028037382,
+                                    "argmax_f1": 0.16666666666666666,
+                                    "argmax_support": 107,
+                                    "threshold_precision": 0.14814814814814814,
+                                    "threshold_recall": 0.07476635514018691,
+                                    "threshold_f1": 0.09937888198757763,
+                                    "threshold_support": 107
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.24166666666666667,
+                                    "argmax_recall": 0.2636363636363636,
+                                    "argmax_f1": 0.25217391304347825,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.1095890410958904,
+                                    "threshold_recall": 0.07272727272727272,
+                                    "threshold_f1": 0.08743169398907104,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.3333333333333333,
+                                    "argmax_recall": 0.3333333333333333,
+                                    "argmax_f1": 0.3333333333333333,
+                                    "argmax_support": 99,
+                                    "threshold_precision": 0.2608695652173913,
+                                    "threshold_recall": 0.18181818181818182,
+                                    "threshold_f1": 0.21428571428571427,
+                                    "threshold_support": 99
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.2827586206896552,
+                                    "argmax_recall": 0.37272727272727274,
+                                    "argmax_f1": 0.3215686274509804,
+                                    "argmax_support": 110,
+                                    "threshold_precision": 0.18888888888888888,
+                                    "threshold_recall": 0.15454545454545454,
+                                    "threshold_f1": 0.17,
+                                    "threshold_support": 110
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.31521739130434784,
+                                    "argmax_recall": 0.26126126126126126,
+                                    "argmax_f1": 0.2857142857142857,
+                                    "argmax_support": 111,
+                                    "threshold_precision": 0.265625,
+                                    "threshold_recall": 0.15315315315315314,
+                                    "threshold_f1": 0.19428571428571428,
+                                    "threshold_support": 111
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    37,
+                                    16,
+                                    7,
+                                    5,
+                                    2,
+                                    7,
+                                    5,
+                                    9,
+                                    14
+                                ],
+                                [
+                                    14,
+                                    63,
+                                    18,
+                                    13,
+                                    7,
+                                    5,
+                                    2,
+                                    2,
+                                    9
+                                ],
+                                [
+                                    7,
+                                    24,
+                                    25,
+                                    19,
+                                    15,
+                                    15,
+                                    6,
+                                    3,
+                                    2
+                                ],
+                                [
+                                    5,
+                                    12,
+                                    25,
+                                    16,
+                                    13,
+                                    14,
+                                    5,
+                                    2,
+                                    2
+                                ],
+                                [
+                                    7,
+                                    7,
+                                    21,
+                                    16,
+                                    16,
+                                    21,
+                                    4,
+                                    12,
+                                    3
+                                ],
+                                [
+                                    7,
+                                    4,
+                                    11,
+                                    11,
+                                    14,
+                                    29,
+                                    18,
+                                    9,
+                                    7
+                                ],
+                                [
+                                    2,
+                                    3,
+                                    2,
+                                    5,
+                                    9,
+                                    14,
+                                    33,
+                                    24,
+                                    7
+                                ],
+                                [
+                                    10,
+                                    3,
+                                    1,
+                                    5,
+                                    2,
+                                    10,
+                                    19,
+                                    41,
+                                    19
+                                ],
+                                [
+                                    7,
+                                    5,
+                                    5,
+                                    3,
+                                    7,
+                                    5,
+                                    7,
+                                    43,
+                                    29
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.3627450980392157,
+                                    0.1568627450980392,
+                                    0.06862745098039216,
+                                    0.049019607843137254,
+                                    0.0196078431372549,
+                                    0.06862745098039216,
+                                    0.049019607843137254,
+                                    0.08823529411764706,
+                                    0.13725490196078433
+                                ],
+                                [
+                                    0.10526315789473684,
+                                    0.47368421052631576,
+                                    0.13533834586466165,
+                                    0.09774436090225563,
+                                    0.05263157894736842,
+                                    0.03759398496240601,
+                                    0.015037593984962405,
+                                    0.015037593984962405,
+                                    0.06766917293233082
+                                ],
+                                [
+                                    0.0603448275862069,
+                                    0.20689655172413793,
+                                    0.21551724137931033,
+                                    0.16379310344827586,
+                                    0.12931034482758622,
+                                    0.12931034482758622,
+                                    0.05172413793103448,
+                                    0.02586206896551724,
+                                    0.017241379310344827
+                                ],
+                                [
+                                    0.05319148936170213,
+                                    0.1276595744680851,
+                                    0.26595744680851063,
+                                    0.1702127659574468,
+                                    0.13829787234042554,
+                                    0.14893617021276595,
+                                    0.05319148936170213,
+                                    0.02127659574468085,
+                                    0.02127659574468085
+                                ],
+                                [
+                                    0.06542056074766354,
+                                    0.06542056074766354,
+                                    0.19626168224299065,
+                                    0.14953271028037382,
+                                    0.14953271028037382,
+                                    0.19626168224299065,
+                                    0.037383177570093455,
+                                    0.11214953271028037,
+                                    0.028037383177570093
+                                ],
+                                [
+                                    0.06363636363636363,
+                                    0.03636363636363636,
+                                    0.1,
+                                    0.1,
+                                    0.12727272727272726,
+                                    0.2636363636363636,
+                                    0.16363636363636364,
+                                    0.08181818181818182,
+                                    0.06363636363636363
+                                ],
+                                [
+                                    0.020202020202020204,
+                                    0.030303030303030304,
+                                    0.020202020202020204,
+                                    0.050505050505050504,
+                                    0.09090909090909091,
+                                    0.1414141414141414,
+                                    0.3333333333333333,
+                                    0.24242424242424243,
+                                    0.0707070707070707
+                                ],
+                                [
+                                    0.09090909090909091,
+                                    0.02727272727272727,
+                                    0.00909090909090909,
+                                    0.045454545454545456,
+                                    0.01818181818181818,
+                                    0.09090909090909091,
+                                    0.17272727272727273,
+                                    0.37272727272727274,
+                                    0.17272727272727273
+                                ],
+                                [
+                                    0.06306306306306306,
+                                    0.04504504504504504,
+                                    0.04504504504504504,
+                                    0.02702702702702703,
+                                    0.06306306306306306,
+                                    0.04504504504504504,
+                                    0.06306306306306306,
+                                    0.38738738738738737,
+                                    0.26126126126126126
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 49,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_empty_room_5_seed39.pth"
+                    }
+                ]
+            }
+        },
+        "both": {
+            "classroom": {
+                "activity_accuracy": {
+                    "avg": 49.734395750332006,
+                    "std": 0.0,
+                    "text": "49.73+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.851261620185923,
+                    "std": 0.0,
+                    "text": "3.85+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 8.761528326745719,
+                    "std": 0.0,
+                    "text": "8.76+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 8.38425644237788,
+                    "std": 0.0,
+                    "text": "8.38+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 6.812257144262457,
+                    "std": 0.0,
+                    "text": "6.81+/-0.00"
+                },
+                "loss": {
+                    "avg": 5.061102057199871,
+                    "std": 0.0,
+                    "text": "5.06+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 5.061102057199871,
+                        "activity_accuracy": 49.734395750332006,
+                        "exact_54_accuracy": 3.851261620185923,
+                        "micro_f1": 8.761528326745719,
+                        "macro_f1": 8.38425644237788,
+                        "hamming_loss": 6.812257144262457,
+                        "activity_analysis": {
+                            "active_user_rows": 1945,
+                            "absent_user_rows": 2573,
+                            "threshold_none_rate": 76.95883134130146,
+                            "threshold_multi_rate": 1.1066843736166445,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.1750841750841751,
+                                    "argmax_recall": 0.2311111111111111,
+                                    "argmax_f1": 0.19923371647509577,
+                                    "argmax_support": 225,
+                                    "threshold_precision": 0.10655737704918032,
+                                    "threshold_recall": 0.057777777777777775,
+                                    "threshold_f1": 0.07492795389048991,
+                                    "threshold_support": 225
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.33816425120772947,
+                                    "argmax_recall": 0.3017241379310345,
+                                    "argmax_f1": 0.31890660592255127,
+                                    "argmax_support": 232,
+                                    "threshold_precision": 0.21739130434782608,
+                                    "threshold_recall": 0.12931034482758622,
+                                    "threshold_f1": 0.16216216216216217,
+                                    "threshold_support": 232
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.20588235294117646,
+                                    "argmax_recall": 0.15555555555555556,
+                                    "argmax_f1": 0.17721518987341772,
+                                    "argmax_support": 225,
+                                    "threshold_precision": 0.1452991452991453,
+                                    "threshold_recall": 0.07555555555555556,
+                                    "threshold_f1": 0.09941520467836257,
+                                    "threshold_support": 225
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.17721518987341772,
+                                    "argmax_recall": 0.125,
+                                    "argmax_f1": 0.14659685863874344,
+                                    "argmax_support": 224,
+                                    "threshold_precision": 0.0759493670886076,
+                                    "threshold_recall": 0.026785714285714284,
+                                    "threshold_f1": 0.039603960396039604,
+                                    "threshold_support": 224
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.15488215488215487,
+                                    "argmax_recall": 0.20175438596491227,
+                                    "argmax_f1": 0.17523809523809525,
+                                    "argmax_support": 228,
+                                    "threshold_precision": 0.09467455621301775,
+                                    "threshold_recall": 0.07017543859649122,
+                                    "threshold_f1": 0.08060453400503778,
+                                    "threshold_support": 228
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.1881720430107527,
+                                    "argmax_recall": 0.16990291262135923,
+                                    "argmax_f1": 0.17857142857142858,
+                                    "argmax_support": 206,
+                                    "threshold_precision": 0.12244897959183673,
+                                    "threshold_recall": 0.05825242718446602,
+                                    "threshold_f1": 0.07894736842105263,
+                                    "threshold_support": 206
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.12972972972972974,
+                                    "argmax_recall": 0.11822660098522167,
+                                    "argmax_f1": 0.12371134020618557,
+                                    "argmax_support": 203,
+                                    "threshold_precision": 0.07547169811320754,
+                                    "threshold_recall": 0.03940886699507389,
+                                    "threshold_f1": 0.05177993527508091,
+                                    "threshold_support": 203
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.19786096256684493,
+                                    "argmax_recall": 0.18974358974358974,
+                                    "argmax_f1": 0.193717277486911,
+                                    "argmax_support": 195,
+                                    "threshold_precision": 0.11206896551724138,
+                                    "threshold_recall": 0.06666666666666667,
+                                    "threshold_f1": 0.08360128617363344,
+                                    "threshold_support": 195
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.16666666666666666,
+                                    "argmax_recall": 0.20772946859903382,
+                                    "argmax_f1": 0.18494623655913978,
+                                    "argmax_support": 207,
+                                    "threshold_precision": 0.1232876712328767,
+                                    "threshold_recall": 0.08695652173913043,
+                                    "threshold_f1": 0.10198300283286119,
+                                    "threshold_support": 207
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    52,
+                                    29,
+                                    15,
+                                    17,
+                                    22,
+                                    19,
+                                    13,
+                                    22,
+                                    36
+                                ],
+                                [
+                                    23,
+                                    70,
+                                    25,
+                                    17,
+                                    33,
+                                    19,
+                                    12,
+                                    11,
+                                    22
+                                ],
+                                [
+                                    29,
+                                    25,
+                                    35,
+                                    20,
+                                    38,
+                                    24,
+                                    14,
+                                    12,
+                                    28
+                                ],
+                                [
+                                    36,
+                                    19,
+                                    24,
+                                    28,
+                                    41,
+                                    15,
+                                    21,
+                                    15,
+                                    25
+                                ],
+                                [
+                                    36,
+                                    17,
+                                    17,
+                                    24,
+                                    46,
+                                    24,
+                                    26,
+                                    13,
+                                    25
+                                ],
+                                [
+                                    18,
+                                    10,
+                                    15,
+                                    17,
+                                    33,
+                                    35,
+                                    30,
+                                    20,
+                                    28
+                                ],
+                                [
+                                    29,
+                                    14,
+                                    15,
+                                    11,
+                                    28,
+                                    20,
+                                    24,
+                                    33,
+                                    29
+                                ],
+                                [
+                                    34,
+                                    9,
+                                    12,
+                                    14,
+                                    30,
+                                    16,
+                                    21,
+                                    37,
+                                    22
+                                ],
+                                [
+                                    40,
+                                    14,
+                                    12,
+                                    10,
+                                    26,
+                                    14,
+                                    24,
+                                    24,
+                                    43
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.2311111111111111,
+                                    0.1288888888888889,
+                                    0.06666666666666667,
+                                    0.07555555555555556,
+                                    0.09777777777777778,
+                                    0.08444444444444445,
+                                    0.057777777777777775,
+                                    0.09777777777777778,
+                                    0.16
+                                ],
+                                [
+                                    0.09913793103448276,
+                                    0.3017241379310345,
+                                    0.10775862068965517,
+                                    0.07327586206896551,
+                                    0.14224137931034483,
+                                    0.08189655172413793,
+                                    0.05172413793103448,
+                                    0.04741379310344827,
+                                    0.09482758620689655
+                                ],
+                                [
+                                    0.1288888888888889,
+                                    0.1111111111111111,
+                                    0.15555555555555556,
+                                    0.08888888888888889,
+                                    0.1688888888888889,
+                                    0.10666666666666667,
+                                    0.06222222222222222,
+                                    0.05333333333333334,
+                                    0.12444444444444444
+                                ],
+                                [
+                                    0.16071428571428573,
+                                    0.08482142857142858,
+                                    0.10714285714285714,
+                                    0.125,
+                                    0.18303571428571427,
+                                    0.06696428571428571,
+                                    0.09375,
+                                    0.06696428571428571,
+                                    0.11160714285714286
+                                ],
+                                [
+                                    0.15789473684210525,
+                                    0.07456140350877193,
+                                    0.07456140350877193,
+                                    0.10526315789473684,
+                                    0.20175438596491227,
+                                    0.10526315789473684,
+                                    0.11403508771929824,
+                                    0.05701754385964912,
+                                    0.10964912280701754
+                                ],
+                                [
+                                    0.08737864077669903,
+                                    0.04854368932038835,
+                                    0.07281553398058252,
+                                    0.0825242718446602,
+                                    0.16019417475728157,
+                                    0.16990291262135923,
+                                    0.14563106796116504,
+                                    0.0970873786407767,
+                                    0.13592233009708737
+                                ],
+                                [
+                                    0.14285714285714285,
+                                    0.06896551724137931,
+                                    0.07389162561576355,
+                                    0.054187192118226604,
+                                    0.13793103448275862,
+                                    0.09852216748768473,
+                                    0.11822660098522167,
+                                    0.1625615763546798,
+                                    0.14285714285714285
+                                ],
+                                [
+                                    0.17435897435897435,
+                                    0.046153846153846156,
+                                    0.06153846153846154,
+                                    0.07179487179487179,
+                                    0.15384615384615385,
+                                    0.08205128205128205,
+                                    0.1076923076923077,
+                                    0.18974358974358974,
+                                    0.11282051282051282
+                                ],
+                                [
+                                    0.1932367149758454,
+                                    0.06763285024154589,
+                                    0.057971014492753624,
+                                    0.04830917874396135,
+                                    0.12560386473429952,
+                                    0.06763285024154589,
+                                    0.11594202898550725,
+                                    0.11594202898550725,
+                                    0.20772946859903382
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 34,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_classroom_both_seed39.pth"
+                    }
+                ]
+            },
+            "meeting_room": {
+                "activity_accuracy": {
+                    "avg": 49.18105356352368,
+                    "std": 0.0,
+                    "text": "49.18+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.187250996015936,
+                    "std": 0.0,
+                    "text": "3.19+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 8.959999999999999,
+                    "std": 0.0,
+                    "text": "8.96+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 8.081683024229884,
+                    "std": 0.0,
+                    "text": "8.08+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 6.996704539865231,
+                    "std": 0.0,
+                    "text": "7.00+/-0.00"
+                },
+                "loss": {
+                    "avg": 4.037675872108693,
+                    "std": 0.0,
+                    "text": "4.04+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 4.037675872108693,
+                        "activity_accuracy": 49.18105356352368,
+                        "exact_54_accuracy": 3.187250996015936,
+                        "micro_f1": 8.959999999999999,
+                        "macro_f1": 8.081683024229884,
+                        "hamming_loss": 6.996704539865231,
+                        "activity_analysis": {
+                            "active_user_rows": 1945,
+                            "absent_user_rows": 2573,
+                            "threshold_none_rate": 76.07348384240814,
+                            "threshold_multi_rate": 2.1691013722886234,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.25663716814159293,
+                                    "argmax_recall": 0.1288888888888889,
+                                    "argmax_f1": 0.17159763313609466,
+                                    "argmax_support": 225,
+                                    "threshold_precision": 0.16071428571428573,
+                                    "threshold_recall": 0.04,
+                                    "threshold_f1": 0.06405693950177936,
+                                    "threshold_support": 225
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.2727272727272727,
+                                    "argmax_recall": 0.20689655172413793,
+                                    "argmax_f1": 0.23529411764705882,
+                                    "argmax_support": 232,
+                                    "threshold_precision": 0.16417910447761194,
+                                    "threshold_recall": 0.04741379310344827,
+                                    "threshold_f1": 0.07357859531772576,
+                                    "threshold_support": 232
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.13962264150943396,
+                                    "argmax_recall": 0.16444444444444445,
+                                    "argmax_f1": 0.1510204081632653,
+                                    "argmax_support": 225,
+                                    "threshold_precision": 0.1103448275862069,
+                                    "threshold_recall": 0.07111111111111111,
+                                    "threshold_f1": 0.08648648648648649,
+                                    "threshold_support": 225
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.17712177121771217,
+                                    "argmax_recall": 0.21428571428571427,
+                                    "argmax_f1": 0.19393939393939394,
+                                    "argmax_support": 224,
+                                    "threshold_precision": 0.12422360248447205,
+                                    "threshold_recall": 0.08928571428571429,
+                                    "threshold_f1": 0.1038961038961039,
+                                    "threshold_support": 224
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.15053763440860216,
+                                    "argmax_recall": 0.06140350877192982,
+                                    "argmax_f1": 0.08722741433021806,
+                                    "argmax_support": 228,
+                                    "threshold_precision": 0.10869565217391304,
+                                    "threshold_recall": 0.021929824561403508,
+                                    "threshold_f1": 0.0364963503649635,
+                                    "threshold_support": 228
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.203125,
+                                    "argmax_recall": 0.06310679611650485,
+                                    "argmax_f1": 0.0962962962962963,
+                                    "argmax_support": 206,
+                                    "threshold_precision": 0.32,
+                                    "threshold_recall": 0.038834951456310676,
+                                    "threshold_f1": 0.06926406926406926,
+                                    "threshold_support": 206
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.16230366492146597,
+                                    "argmax_recall": 0.15270935960591134,
+                                    "argmax_f1": 0.15736040609137056,
+                                    "argmax_support": 203,
+                                    "threshold_precision": 0.15384615384615385,
+                                    "threshold_recall": 0.08866995073891626,
+                                    "threshold_f1": 0.1125,
+                                    "threshold_support": 203
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.1343042071197411,
+                                    "argmax_recall": 0.4256410256410256,
+                                    "argmax_f1": 0.20418204182041821,
+                                    "argmax_support": 195,
+                                    "threshold_precision": 0.08533916849015317,
+                                    "threshold_recall": 0.2,
+                                    "threshold_f1": 0.1196319018404908,
+                                    "threshold_support": 195
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.17532467532467533,
+                                    "argmax_recall": 0.13043478260869565,
+                                    "argmax_f1": 0.14958448753462603,
+                                    "argmax_support": 207,
+                                    "threshold_precision": 0.1320754716981132,
+                                    "threshold_recall": 0.06763285024154589,
+                                    "threshold_f1": 0.08945686900958466,
+                                    "threshold_support": 207
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    29,
+                                    24,
+                                    24,
+                                    23,
+                                    8,
+                                    5,
+                                    16,
+                                    75,
+                                    21
+                                ],
+                                [
+                                    17,
+                                    48,
+                                    36,
+                                    34,
+                                    6,
+                                    5,
+                                    22,
+                                    54,
+                                    10
+                                ],
+                                [
+                                    7,
+                                    21,
+                                    37,
+                                    49,
+                                    10,
+                                    10,
+                                    18,
+                                    58,
+                                    15
+                                ],
+                                [
+                                    10,
+                                    19,
+                                    49,
+                                    48,
+                                    14,
+                                    5,
+                                    13,
+                                    58,
+                                    8
+                                ],
+                                [
+                                    12,
+                                    16,
+                                    42,
+                                    38,
+                                    14,
+                                    7,
+                                    15,
+                                    65,
+                                    19
+                                ],
+                                [
+                                    7,
+                                    16,
+                                    24,
+                                    27,
+                                    17,
+                                    13,
+                                    23,
+                                    63,
+                                    16
+                                ],
+                                [
+                                    8,
+                                    12,
+                                    15,
+                                    24,
+                                    12,
+                                    7,
+                                    31,
+                                    77,
+                                    17
+                                ],
+                                [
+                                    8,
+                                    9,
+                                    16,
+                                    16,
+                                    6,
+                                    6,
+                                    30,
+                                    83,
+                                    21
+                                ],
+                                [
+                                    15,
+                                    11,
+                                    22,
+                                    12,
+                                    6,
+                                    6,
+                                    23,
+                                    85,
+                                    27
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.1288888888888889,
+                                    0.10666666666666667,
+                                    0.10666666666666667,
+                                    0.10222222222222223,
+                                    0.035555555555555556,
+                                    0.022222222222222223,
+                                    0.07111111111111111,
+                                    0.3333333333333333,
+                                    0.09333333333333334
+                                ],
+                                [
+                                    0.07327586206896551,
+                                    0.20689655172413793,
+                                    0.15517241379310345,
+                                    0.14655172413793102,
+                                    0.02586206896551724,
+                                    0.021551724137931036,
+                                    0.09482758620689655,
+                                    0.23275862068965517,
+                                    0.04310344827586207
+                                ],
+                                [
+                                    0.03111111111111111,
+                                    0.09333333333333334,
+                                    0.16444444444444445,
+                                    0.21777777777777776,
+                                    0.044444444444444446,
+                                    0.044444444444444446,
+                                    0.08,
+                                    0.2577777777777778,
+                                    0.06666666666666667
+                                ],
+                                [
+                                    0.044642857142857144,
+                                    0.08482142857142858,
+                                    0.21875,
+                                    0.21428571428571427,
+                                    0.0625,
+                                    0.022321428571428572,
+                                    0.05803571428571429,
+                                    0.25892857142857145,
+                                    0.03571428571428571
+                                ],
+                                [
+                                    0.05263157894736842,
+                                    0.07017543859649122,
+                                    0.18421052631578946,
+                                    0.16666666666666666,
+                                    0.06140350877192982,
+                                    0.03070175438596491,
+                                    0.06578947368421052,
+                                    0.2850877192982456,
+                                    0.08333333333333333
+                                ],
+                                [
+                                    0.03398058252427184,
+                                    0.07766990291262135,
+                                    0.11650485436893204,
+                                    0.13106796116504854,
+                                    0.0825242718446602,
+                                    0.06310679611650485,
+                                    0.11165048543689321,
+                                    0.3058252427184466,
+                                    0.07766990291262135
+                                ],
+                                [
+                                    0.03940886699507389,
+                                    0.059113300492610835,
+                                    0.07389162561576355,
+                                    0.11822660098522167,
+                                    0.059113300492610835,
+                                    0.034482758620689655,
+                                    0.15270935960591134,
+                                    0.3793103448275862,
+                                    0.08374384236453201
+                                ],
+                                [
+                                    0.041025641025641026,
+                                    0.046153846153846156,
+                                    0.08205128205128205,
+                                    0.08205128205128205,
+                                    0.03076923076923077,
+                                    0.03076923076923077,
+                                    0.15384615384615385,
+                                    0.4256410256410256,
+                                    0.1076923076923077
+                                ],
+                                [
+                                    0.07246376811594203,
+                                    0.05314009661835749,
+                                    0.10628019323671498,
+                                    0.057971014492753624,
+                                    0.028985507246376812,
+                                    0.028985507246376812,
+                                    0.1111111111111111,
+                                    0.4106280193236715,
+                                    0.13043478260869565
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 17,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_meeting_room_both_seed39.pth"
+                    }
+                ]
+            },
+            "empty_room": {
+                "activity_accuracy": {
+                    "avg": 48.73837981407703,
+                    "std": 0.0,
+                    "text": "48.74+/-0.00"
+                },
+                "exact_54_accuracy": {
+                    "avg": 3.5856573705179287,
+                    "std": 0.0,
+                    "text": "3.59+/-0.00"
+                },
+                "micro_f1": {
+                    "avg": 11.803874092009686,
+                    "std": 0.0,
+                    "text": "11.80+/-0.00"
+                },
+                "macro_f1": {
+                    "avg": 11.451496449878176,
+                    "std": 0.0,
+                    "text": "11.45+/-0.00"
+                },
+                "hamming_loss": {
+                    "avg": 7.1663961438197825,
+                    "std": 0.0,
+                    "text": "7.17+/-0.00"
+                },
+                "loss": {
+                    "avg": 5.322718153595133,
+                    "std": 0.0,
+                    "text": "5.32+/-0.00"
+                },
+                "repeats": [
+                    {
+                        "loss": 5.322718153595133,
+                        "activity_accuracy": 48.73837981407703,
+                        "exact_54_accuracy": 3.5856573705179287,
+                        "micro_f1": 11.803874092009686,
+                        "macro_f1": 11.451496449878176,
+                        "hamming_loss": 7.1663961438197825,
+                        "activity_analysis": {
+                            "active_user_rows": 1945,
+                            "absent_user_rows": 2573,
+                            "threshold_none_rate": 72.04515272244356,
+                            "threshold_multi_rate": 2.1248339973439574,
+                            "per_activity": [
+                                {
+                                    "activity": "nothing",
+                                    "argmax_precision": 0.2857142857142857,
+                                    "argmax_recall": 0.2311111111111111,
+                                    "argmax_f1": 0.25552825552825553,
+                                    "argmax_support": 225,
+                                    "threshold_precision": 0.12631578947368421,
+                                    "threshold_recall": 0.05333333333333334,
+                                    "threshold_f1": 0.075,
+                                    "threshold_support": 225
+                                },
+                                {
+                                    "activity": "walk",
+                                    "argmax_precision": 0.35096153846153844,
+                                    "argmax_recall": 0.3146551724137931,
+                                    "argmax_f1": 0.33181818181818185,
+                                    "argmax_support": 232,
+                                    "threshold_precision": 0.23952095808383234,
+                                    "threshold_recall": 0.1724137931034483,
+                                    "threshold_f1": 0.20050125313283207,
+                                    "threshold_support": 232
+                                },
+                                {
+                                    "activity": "rotation",
+                                    "argmax_precision": 0.164,
+                                    "argmax_recall": 0.18222222222222223,
+                                    "argmax_f1": 0.1726315789473684,
+                                    "argmax_support": 225,
+                                    "threshold_precision": 0.11627906976744186,
+                                    "threshold_recall": 0.06666666666666667,
+                                    "threshold_f1": 0.0847457627118644,
+                                    "threshold_support": 225
+                                },
+                                {
+                                    "activity": "jump",
+                                    "argmax_precision": 0.22026431718061673,
+                                    "argmax_recall": 0.22321428571428573,
+                                    "argmax_f1": 0.22172949002217296,
+                                    "argmax_support": 224,
+                                    "threshold_precision": 0.1889763779527559,
+                                    "threshold_recall": 0.10714285714285714,
+                                    "threshold_f1": 0.13675213675213677,
+                                    "threshold_support": 224
+                                },
+                                {
+                                    "activity": "wave",
+                                    "argmax_precision": 0.14619883040935672,
+                                    "argmax_recall": 0.10964912280701754,
+                                    "argmax_f1": 0.12531328320802004,
+                                    "argmax_support": 228,
+                                    "threshold_precision": 0.07453416149068323,
+                                    "threshold_recall": 0.05263157894736842,
+                                    "threshold_f1": 0.061696658097686374,
+                                    "threshold_support": 228
+                                },
+                                {
+                                    "activity": "lie_down",
+                                    "argmax_precision": 0.20175438596491227,
+                                    "argmax_recall": 0.22330097087378642,
+                                    "argmax_f1": 0.2119815668202765,
+                                    "argmax_support": 206,
+                                    "threshold_precision": 0.1488095238095238,
+                                    "threshold_recall": 0.12135922330097088,
+                                    "threshold_f1": 0.13368983957219252,
+                                    "threshold_support": 206
+                                },
+                                {
+                                    "activity": "pick_up",
+                                    "argmax_precision": 0.2677595628415301,
+                                    "argmax_recall": 0.2413793103448276,
+                                    "argmax_f1": 0.2538860103626943,
+                                    "argmax_support": 203,
+                                    "threshold_precision": 0.15508021390374332,
+                                    "threshold_recall": 0.14285714285714285,
+                                    "threshold_f1": 0.14871794871794872,
+                                    "threshold_support": 203
+                                },
+                                {
+                                    "activity": "sit_down",
+                                    "argmax_precision": 0.20987654320987653,
+                                    "argmax_recall": 0.26153846153846155,
+                                    "argmax_f1": 0.2328767123287671,
+                                    "argmax_support": 195,
+                                    "threshold_precision": 0.17123287671232876,
+                                    "threshold_recall": 0.1282051282051282,
+                                    "threshold_f1": 0.1466275659824047,
+                                    "threshold_support": 195
+                                },
+                                {
+                                    "activity": "stand_up",
+                                    "argmax_precision": 0.13043478260869565,
+                                    "argmax_recall": 0.15942028985507245,
+                                    "argmax_f1": 0.14347826086956522,
+                                    "argmax_support": 207,
+                                    "threshold_precision": 0.07262569832402235,
+                                    "threshold_recall": 0.06280193236714976,
+                                    "threshold_f1": 0.06735751295336788,
+                                    "threshold_support": 207
+                                }
+                            ],
+                            "confusion_matrix": [
+                                [
+                                    52,
+                                    36,
+                                    22,
+                                    15,
+                                    15,
+                                    16,
+                                    8,
+                                    22,
+                                    39
+                                ],
+                                [
+                                    20,
+                                    73,
+                                    31,
+                                    21,
+                                    19,
+                                    20,
+                                    10,
+                                    17,
+                                    21
+                                ],
+                                [
+                                    14,
+                                    29,
+                                    41,
+                                    35,
+                                    29,
+                                    17,
+                                    21,
+                                    18,
+                                    21
+                                ],
+                                [
+                                    10,
+                                    13,
+                                    38,
+                                    50,
+                                    30,
+                                    22,
+                                    19,
+                                    15,
+                                    27
+                                ],
+                                [
+                                    20,
+                                    15,
+                                    39,
+                                    27,
+                                    25,
+                                    34,
+                                    14,
+                                    26,
+                                    28
+                                ],
+                                [
+                                    14,
+                                    8,
+                                    21,
+                                    31,
+                                    20,
+                                    46,
+                                    15,
+                                    29,
+                                    22
+                                ],
+                                [
+                                    9,
+                                    8,
+                                    22,
+                                    17,
+                                    8,
+                                    36,
+                                    49,
+                                    28,
+                                    26
+                                ],
+                                [
+                                    15,
+                                    6,
+                                    14,
+                                    8,
+                                    12,
+                                    22,
+                                    31,
+                                    51,
+                                    36
+                                ],
+                                [
+                                    28,
+                                    20,
+                                    22,
+                                    23,
+                                    13,
+                                    15,
+                                    16,
+                                    37,
+                                    33
+                                ]
+                            ],
+                            "confusion_matrix_normalized": [
+                                [
+                                    0.2311111111111111,
+                                    0.16,
+                                    0.09777777777777778,
+                                    0.06666666666666667,
+                                    0.06666666666666667,
+                                    0.07111111111111111,
+                                    0.035555555555555556,
+                                    0.09777777777777778,
+                                    0.17333333333333334
+                                ],
+                                [
+                                    0.08620689655172414,
+                                    0.3146551724137931,
+                                    0.1336206896551724,
+                                    0.09051724137931035,
+                                    0.08189655172413793,
+                                    0.08620689655172414,
+                                    0.04310344827586207,
+                                    0.07327586206896551,
+                                    0.09051724137931035
+                                ],
+                                [
+                                    0.06222222222222222,
+                                    0.1288888888888889,
+                                    0.18222222222222223,
+                                    0.15555555555555556,
+                                    0.1288888888888889,
+                                    0.07555555555555556,
+                                    0.09333333333333334,
+                                    0.08,
+                                    0.09333333333333334
+                                ],
+                                [
+                                    0.044642857142857144,
+                                    0.05803571428571429,
+                                    0.16964285714285715,
+                                    0.22321428571428573,
+                                    0.13392857142857142,
+                                    0.09821428571428571,
+                                    0.08482142857142858,
+                                    0.06696428571428571,
+                                    0.12053571428571429
+                                ],
+                                [
+                                    0.08771929824561403,
+                                    0.06578947368421052,
+                                    0.17105263157894737,
+                                    0.11842105263157894,
+                                    0.10964912280701754,
+                                    0.14912280701754385,
+                                    0.06140350877192982,
+                                    0.11403508771929824,
+                                    0.12280701754385964
+                                ],
+                                [
+                                    0.06796116504854369,
+                                    0.038834951456310676,
+                                    0.10194174757281553,
+                                    0.15048543689320387,
+                                    0.0970873786407767,
+                                    0.22330097087378642,
+                                    0.07281553398058252,
+                                    0.1407766990291262,
+                                    0.10679611650485436
+                                ],
+                                [
+                                    0.04433497536945813,
+                                    0.03940886699507389,
+                                    0.10837438423645321,
+                                    0.08374384236453201,
+                                    0.03940886699507389,
+                                    0.17733990147783252,
+                                    0.2413793103448276,
+                                    0.13793103448275862,
+                                    0.12807881773399016
+                                ],
+                                [
+                                    0.07692307692307693,
+                                    0.03076923076923077,
+                                    0.07179487179487179,
+                                    0.041025641025641026,
+                                    0.06153846153846154,
+                                    0.11282051282051282,
+                                    0.15897435897435896,
+                                    0.26153846153846155,
+                                    0.18461538461538463
+                                ],
+                                [
+                                    0.13526570048309178,
+                                    0.0966183574879227,
+                                    0.10628019323671498,
+                                    0.1111111111111111,
+                                    0.06280193236714976,
+                                    0.07246376811594203,
+                                    0.07729468599033816,
+                                    0.178743961352657,
+                                    0.15942028985507245
+                                ]
+                            ]
+                        },
+                        "seed": 39,
+                        "best_epoch": 45,
+                        "model_path": "D:\\Deepak\\wifi_csi\\resnet_baseline\\saved_models_slot_attention\\slot_attention_empty_room_both_seed39.pth"
+                    }
+                ]
+            }
+        }
+    }
+}
