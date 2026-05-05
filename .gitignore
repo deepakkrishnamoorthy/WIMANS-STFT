@@ -38,12 +38,21 @@ stft_extraction/outputs/
 *.png
 *.jpg
 *.jpeg
+*.gif
 *.tif
 *.tiff
 *.bmp
 
-# Keep the paper architecture diagram tracked
-!multi_head_experiments/docs/stft_top5_multihead_architecture.png
+# Documents and result artifacts kept out of code-only Git pushes
+*.pdf
+*.xlsx
+*.ipynb
+*_results.json
+*_analysis.json
+_smoke*.json
+_analysis*.json
+context-files/outputs/
+multi_head_experiments/user_accuracy_results.txt
 
 # Temporary extracted paper text
 paper_text_tmp.txt
