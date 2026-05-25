@@ -79,6 +79,8 @@ def parse_args():
     parser.add_argument("--consistency-activity-set", type=float, default=0.0)
     parser.add_argument("--consistency-occupancy", type=float, default=0.0)
     parser.add_argument("--active-count-regularizer", type=float, default=0.0)
+    parser.add_argument("--occupancy-gate", choices=["none", "binary", "prob"], default="none")
+    parser.add_argument("--occupancy-gate-power", type=float, default=1.0)
     parser.add_argument("--augment", action="store_true")
     parser.add_argument("--time-mask-width", type=int, default=0)
     parser.add_argument("--freq-mask-width", type=int, default=0)
@@ -282,24 +284,42 @@ def format_threshold(threshold):
     return f"{float(threshold):.4f}"
 
 
-def predict_with_thresholds(probs, threshold):
+def apply_binary_occupancy_gate(slot_pred, occupancy_pred, occupancy_gate):
+    if occupancy_gate != "binary":
+        return slot_pred
+    gated_slot = slot_pred.reshape(-1, 6, 9).copy()
+    gated_slot[occupancy_pred.reshape(-1, 6) == 0, :] = 0
+    return gated_slot.reshape(-1, 54)
+
+
+def predict_with_thresholds(probs, threshold, occupancy_gate="none", occupancy_gate_power=1.0):
+    gated_probs = probs
+    if occupancy_gate == "prob":
+        gated_probs = dict(probs)
+        occupancy_probs = np.clip(probs["occupancy"].reshape(-1, 6, 1), 0.0, 1.0)
+        gate = np.power(occupancy_probs, occupancy_gate_power)
+        gated_probs["slot_activity"] = (probs["slot_activity"].reshape(-1, 6, 9) * gate).reshape(-1, 54)
+
     if not isinstance(threshold, dict):
+        occupancy_pred = (gated_probs["occupancy"] > float(threshold)).astype(int)
+        slot_pred = (gated_probs["slot_activity"] > float(threshold)).astype(int)
         return {
-            "activity_set": (probs["activity_set"] > float(threshold)).astype(int),
-            "occupancy": (probs["occupancy"] > float(threshold)).astype(int),
-            "slot_activity": (probs["slot_activity"] > float(threshold)).astype(int),
+            "activity_set": (gated_probs["activity_set"] > float(threshold)).astype(int),
+            "occupancy": occupancy_pred,
+            "slot_activity": apply_binary_occupancy_gate(slot_pred, occupancy_pred, occupancy_gate),
         }
 
     activity_threshold = threshold["activity_set"]
     occupancy_threshold = threshold["occupancy"]
     slot_threshold = threshold["slot_activity"]
 
-    activity_pred = (probs["activity_set"] > activity_threshold).astype(int)
-    occupancy_pred = (probs["occupancy"] > occupancy_threshold).astype(int)
+    activity_pred = (gated_probs["activity_set"] > activity_threshold).astype(int)
+    occupancy_pred = (gated_probs["occupancy"] > occupancy_threshold).astype(int)
     if isinstance(slot_threshold, np.ndarray) and slot_threshold.size == 9:
-        slot_pred = (probs["slot_activity"].reshape(-1, 6, 9) > slot_threshold.reshape(1, 1, 9)).astype(int).reshape(-1, 54)
+        slot_pred = (gated_probs["slot_activity"].reshape(-1, 6, 9) > slot_threshold.reshape(1, 1, 9)).astype(int).reshape(-1, 54)
     else:
-        slot_pred = (probs["slot_activity"] > slot_threshold).astype(int)
+        slot_pred = (gated_probs["slot_activity"] > slot_threshold).astype(int)
+    slot_pred = apply_binary_occupancy_gate(slot_pred, occupancy_pred, occupancy_gate)
     return {
         "activity_set": activity_pred,
         "occupancy": occupancy_pred,
@@ -307,8 +327,8 @@ def predict_with_thresholds(probs, threshold):
     }
 
 
-def compute_metrics(labels, probs, threshold):
-    predictions = predict_with_thresholds(probs, threshold)
+def compute_metrics(labels, probs, threshold, occupancy_gate="none", occupancy_gate_power=1.0):
+    predictions = predict_with_thresholds(probs, threshold, occupancy_gate, occupancy_gate_power)
     direct_activity_pred = predictions["activity_set"]
     direct_occupancy_pred = predictions["occupancy"]
     slot_pred = predictions["slot_activity"]
@@ -419,7 +439,13 @@ def tune_global_threshold(labels, probs, mode, args):
         return None
     best_threshold, best_score = 0.5, -1.0
     for threshold in threshold_grid(args):
-        metrics = compute_metrics(labels, probs, float(threshold))
+        metrics = compute_metrics(
+            labels,
+            probs,
+            float(threshold),
+            getattr(args, "occupancy_gate", "none"),
+            getattr(args, "occupancy_gate_power", 1.0),
+        )
         score = metrics[mode]
         if score > best_score:
             best_score = score
@@ -527,6 +553,7 @@ def train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels
         f" PosScale(activity/occupancy/slot)={args.activity_pos_weight_scale}/{args.occupancy_pos_weight_scale}/{args.slot_pos_weight_scale}"
         f" PosFixed(activity/occupancy/slot)={args.activity_pos_weight_fixed}/{args.occupancy_pos_weight_fixed}/{args.slot_pos_weight_fixed}"
         f" Reg(activity/occupancy/count)={args.consistency_activity_set}/{args.consistency_occupancy}/{args.active_count_regularizer}"
+        f" OccupancyGate={args.occupancy_gate} GatePower={args.occupancy_gate_power}"
     )
     if args.augment or args.mixup_alpha > 0.0:
         print(
@@ -552,7 +579,7 @@ def train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels
 
         val_labels, val_probs, val_loss = collect_outputs(model, val_loader, criteria, args, device)
         threshold = tune_threshold(val_labels, val_probs, args)
-        val_metrics = compute_metrics(val_labels, val_probs, threshold)
+        val_metrics = compute_metrics(val_labels, val_probs, threshold, args.occupancy_gate, args.occupancy_gate_power)
         score = val_metrics[args.select_metric]
         if score > best_score:
             best_score = score
@@ -595,7 +622,7 @@ def train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels
 
     model.load_state_dict(best_model_wts)
     test_labels, test_probs, test_loss = collect_outputs(model, test_loader, criteria, args, device)
-    test_metrics = compute_metrics(test_labels, test_probs, best_threshold)
+    test_metrics = compute_metrics(test_labels, test_probs, best_threshold, args.occupancy_gate, args.occupancy_gate_power)
     test_metrics["loss"] = test_loss
 
     os.makedirs(args.save_dir, exist_ok=True)
@@ -656,6 +683,8 @@ def write_excel(args, results):
                 "features": args.features,
                 "band": band_name,
                 "environment": env_name,
+                "occupancy_gate": args.occupancy_gate,
+                "occupancy_gate_power": args.occupancy_gate_power,
                 "direct_activity_set_micro_f1_avg": env_results["direct_activity_set_micro_f1"]["avg"],
                 "direct_occupancy_micro_f1_avg": env_results["direct_occupancy_micro_f1"]["avg"],
                 "slot_activity_set_micro_f1_avg": env_results["slot_activity_set_micro_f1"]["avg"],
@@ -675,6 +704,8 @@ def write_excel(args, results):
                     "seed": repeat["seed"],
                     "best_epoch": repeat["best_epoch"],
                     "threshold": repeat["threshold"],
+                    "occupancy_gate": args.occupancy_gate,
+                    "occupancy_gate_power": args.occupancy_gate_power,
                     "combined_score": repeat["combined_score"],
                     "direct_activity_set_micro_f1": repeat["direct_activity_set_micro_f1"],
                     "direct_activity_set_exact": repeat["direct_activity_set_exact"],

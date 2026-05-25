@@ -83,6 +83,8 @@ def parse_args():
     parser.add_argument("--consistency-activity-set", type=float, default=0.0)
     parser.add_argument("--consistency-occupancy", type=float, default=0.0)
     parser.add_argument("--active-count-regularizer", type=float, default=0.0)
+    parser.add_argument("--occupancy-gate", choices=["none", "binary", "prob"], default="none")
+    parser.add_argument("--occupancy-gate-power", type=float, default=1.0)
     parser.add_argument("--augment", action="store_true")
     parser.add_argument("--time-mask-width", type=int, default=0)
     parser.add_argument("--freq-mask-width", type=int, default=0)
@@ -229,6 +231,7 @@ def train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels
     print(
         f"    Channels={input_channels} Split train/val/test={len(train_dataset)}/{len(val_dataset)}/{len(test_dataset)}"
         f" Select={args.select_metric} Tune={args.tune_threshold} ThresholdStrategy={args.threshold_strategy}"
+        f" OccupancyGate={args.occupancy_gate} GatePower={args.occupancy_gate_power}"
     )
     for stage in stages:
         sargs = stage["args"]
@@ -265,7 +268,7 @@ def train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels
 
             val_labels, val_probs, val_loss = collect_outputs(model, val_loader, criteria, args, device)
             threshold = tune_threshold(val_labels, val_probs, args)
-            val_metrics = compute_metrics(val_labels, val_probs, threshold)
+            val_metrics = compute_metrics(val_labels, val_probs, threshold, args.occupancy_gate, args.occupancy_gate_power)
             score = val_metrics[args.select_metric]
             if score > best_score:
                 best_score = score
@@ -315,7 +318,7 @@ def train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels
 
     model.load_state_dict(best_model_wts)
     test_labels, test_probs, test_loss = collect_outputs(model, test_loader, criteria, args, device)
-    test_metrics = compute_metrics(test_labels, test_probs, best_threshold)
+    test_metrics = compute_metrics(test_labels, test_probs, best_threshold, args.occupancy_gate, args.occupancy_gate_power)
     test_metrics["loss"] = test_loss
 
     os.makedirs(args.save_dir, exist_ok=True)

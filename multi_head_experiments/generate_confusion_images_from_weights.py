@@ -57,6 +57,8 @@ def parse_args():
     parser.add_argument("--save-tables", action="store_true")
     parser.add_argument("--environment", choices=ENVIRONMENTS, default=None)
     parser.add_argument("--seed", type=int, default=None)
+    parser.add_argument("--occupancy-gate", choices=["none", "binary", "prob"], default="none")
+    parser.add_argument("--occupancy-gate-power", type=float, default=1.0)
     return parser.parse_args()
 
 
@@ -145,10 +147,28 @@ def binary_f1_by_label(y_true, y_pred):
     ])
 
 
-def active_activity_confusion(slot_true, slot_probs, threshold):
+def apply_prob_occupancy_gate(probs, occupancy_gate, occupancy_gate_power):
+    if occupancy_gate != "prob":
+        return probs
+    gated = dict(probs)
+    occupancy_probs = np.clip(probs["occupancy"].reshape(-1, 6, 1), 0.0, 1.0)
+    gate = np.power(occupancy_probs, occupancy_gate_power)
+    gated["slot_activity"] = (probs["slot_activity"].reshape(-1, 6, 9) * gate).reshape(-1, 54)
+    return gated
+
+
+def apply_binary_occupancy_gate(slot_pred, occupancy_pred, occupancy_gate):
+    if occupancy_gate != "binary":
+        return slot_pred
+    gated_slot = slot_pred.reshape(-1, 6, 9).copy()
+    gated_slot[occupancy_pred.reshape(-1, 6) == 0, :] = 0
+    return gated_slot.reshape(-1, 54)
+
+
+def active_activity_confusion(slot_true, slot_probs, threshold, slot_pred=None):
     true_user = slot_true.reshape(-1, 6, 9).astype(int)
     prob_user = slot_probs.reshape(-1, 6, 9)
-    pred_user = (prob_user > threshold).astype(int)
+    pred_user = (prob_user > threshold).astype(int) if slot_pred is None else slot_pred.reshape(-1, 6, 9).astype(int)
     true_rows = true_user.reshape(-1, 9)
     pred_rows = pred_user.reshape(-1, 9)
     prob_rows = prob_user.reshape(-1, 9)
@@ -191,10 +211,12 @@ def print_matrix(title, matrix, row_labels, col_labels):
     print(df.to_string())
 
 
-def summarize_metrics(labels, probs, threshold):
-    activity_pred = (probs["activity_set"] > threshold).astype(int)
-    occupancy_pred = (probs["occupancy"] > threshold).astype(int)
-    slot_pred = (probs["slot_activity"] > threshold).astype(int)
+def summarize_metrics(labels, probs, threshold, occupancy_gate="none", occupancy_gate_power=1.0):
+    gated_probs = apply_prob_occupancy_gate(probs, occupancy_gate, occupancy_gate_power)
+    activity_pred = (gated_probs["activity_set"] > threshold).astype(int)
+    occupancy_pred = (gated_probs["occupancy"] > threshold).astype(int)
+    slot_pred = (gated_probs["slot_activity"] > threshold).astype(int)
+    slot_pred = apply_binary_occupancy_gate(slot_pred, occupancy_pred, occupancy_gate)
     slot_true = labels["slot_activity"].astype(int)
     true_occ = labels["occupancy"].astype(int)
     true_activity = labels["activity_set"].astype(int)
@@ -219,7 +241,8 @@ def summarize_metrics(labels, probs, threshold):
 def main():
     args = parse_args()
     weights_dir = os.path.abspath(args.weights_dir)
-    out_dir = os.path.abspath(args.out_dir or os.path.join(weights_dir, "confusion_images"))
+    default_out_name = "confusion_images" if args.occupancy_gate == "none" else f"confusion_images_gate_{args.occupancy_gate}"
+    out_dir = os.path.abspath(args.out_dir or os.path.join(weights_dir, default_out_name))
     os.makedirs(out_dir, exist_ok=True)
 
     cfg = read_key_value_config(args.analysis_excel)
@@ -269,14 +292,16 @@ def main():
         model.load_state_dict(state)
         labels, probs = collect_predictions(model, dataset, args, device)
 
-        activity_pred = (probs["activity_set"] > threshold).astype(int)
-        occupancy_pred = (probs["occupancy"] > threshold).astype(int)
-        slot_pred = (probs["slot_activity"] > threshold).astype(int)
+        gated_probs = apply_prob_occupancy_gate(probs, args.occupancy_gate, args.occupancy_gate_power)
+        activity_pred = (gated_probs["activity_set"] > threshold).astype(int)
+        occupancy_pred = (gated_probs["occupancy"] > threshold).astype(int)
+        slot_pred = (gated_probs["slot_activity"] > threshold).astype(int)
+        slot_pred = apply_binary_occupancy_gate(slot_pred, occupancy_pred, args.occupancy_gate)
         slot_true = labels["slot_activity"].astype(int)
         true_occ = labels["occupancy"].astype(int)
         slot_occ_pred = (slot_pred.reshape(-1, 6, 9).sum(axis=2) > 0).astype(int)
 
-        metrics = summarize_metrics(labels, probs, threshold)
+        metrics = summarize_metrics(labels, probs, threshold, args.occupancy_gate, args.occupancy_gate_power)
         metrics.update({
             "model": model_name,
             "features": row["features"],
@@ -285,6 +310,8 @@ def main():
             "seed": seed,
             "threshold": threshold,
             "threshold_source": threshold_source,
+            "occupancy_gate": args.occupancy_gate,
+            "occupancy_gate_power": args.occupancy_gate_power,
         })
         summary_rows.append(metrics)
 
@@ -307,7 +334,7 @@ def main():
         occupancy_counts = binary_counts(true_occ, occupancy_pred)
         slot_occupancy_counts = binary_counts(true_occ, slot_occ_pred)
         slot_f1 = slot_f1_heatmap(slot_true, slot_pred)
-        active_cm = active_activity_confusion(slot_true, probs["slot_activity"], threshold)
+        active_cm = active_activity_confusion(slot_true, gated_probs["slot_activity"], threshold, slot_pred)
 
         print_matrix("Activity head 2x2 counts per activity [TN FP FN TP]", activity_counts, ACTIVITY_NAMES, ["TN", "FP", "FN", "TP"])
         print_matrix("Occupancy head 2x2 counts per user [TN FP FN TP]", occupancy_counts, [f"user_{i}" for i in range(1, 7)], ["TN", "FP", "FN", "TP"])
@@ -343,7 +370,7 @@ def main():
     summary_df = pd.DataFrame(summary_rows)
     print("Summary across processed checkpoints")
     print(summary_df[[
-        "environment", "seed", "threshold", "threshold_source", "activity_head_f1", "occupancy_head_f1",
+        "environment", "seed", "threshold", "threshold_source", "occupancy_gate", "activity_head_f1", "occupancy_head_f1",
         "slot_activity_set_f1", "active_slot_f1", "slot54_f1",
         "true_active_slots", "pred_active_slots_slot_head", "pred_active_slots_occupancy_head",
     ]].round(3).to_string(index=False))
