@@ -30,6 +30,7 @@ saved_models*/
 **/saved_models*/
 
 # Generated experiment outputs
+credibility/outputs/
 multi_head_experiments/outputs/
 resnet_baseline/outputs/
 top5_subcarrier_experiments/outputs/
