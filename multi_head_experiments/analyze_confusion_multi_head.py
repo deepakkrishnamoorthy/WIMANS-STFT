@@ -12,9 +12,9 @@ from torch.utils.data import DataLoader
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(os.path.join(ROOT, "WiMANS-main", "benchmark", "wifi_csi"))
 
-from dataset_multi_head import MultiHeadSTFTDataset
+from dataset_multi_head import MultiHeadPatchDataset, MultiHeadSTFTDataset
 from load_data import load_data_y
-from model_multi_head import CLSTMMultiHead, ResNet18MultiHead, THATStyleMultiHead
+from model_multi_head import CLSTMMultiHead, MambaMultiHead, PatchMambaMultiHead, ResNet18MultiHead, THATStyleMultiHead
 
 
 ACTIVITY_NAMES = ["nothing", "walk", "rotation", "jump", "wave", "lie_down", "pick_up", "sit_down", "stand_up"]
@@ -22,11 +22,14 @@ BAND_GROUPS = {"2.4": ["2.4"], "5": ["5"], "both": ["2.4", "5"]}
 FEATURE_DIRS = {
     "multichannel": r"D:\Deepak\wifi_csi\dataset\stft_top5_multichannel_npy",
     "pca": r"D:\Deepak\wifi_csi\dataset\stft_top5_npy",
+    "patches": r"D:\Deepak\wifi_csi\dataset\stft_top5_multichannel_vit_patches_npy",
 }
 MODEL_FACTORIES = {
     "resnet18": lambda input_channels: ResNet18MultiHead(input_channels=input_channels),
     "clstm": lambda input_channels: CLSTMMultiHead(input_channels=input_channels),
     "that_style": lambda input_channels: THATStyleMultiHead(input_channels=input_channels),
+    "mamba": lambda input_channels: MambaMultiHead(input_channels=input_channels),
+    "patch_mamba": lambda input_channels: PatchMambaMultiHead(patch_dim=input_channels),
 }
 
 
@@ -49,10 +52,14 @@ def read_config(path):
     return cfg.iloc[0].to_dict()
 
 
-def infer_input_channels(data_dir):
+def infer_input_channels(data_dir, features="multichannel"):
     for filename in os.listdir(data_dir):
         if filename.endswith(".npy"):
             sample = np.load(os.path.join(data_dir, filename), mmap_mode="r")
+            if features == "patches":
+                if sample.ndim != 2:
+                    raise ValueError(f"Patch feature file must be 2D tokens x dim, got {sample.shape} in {filename}")
+                return sample.shape[1]
             return 1 if sample.ndim == 2 else sample.shape[0]
     raise FileNotFoundError(f"No .npy files found in {data_dir}")
 
@@ -221,7 +228,7 @@ def main():
     val_size = float(cfg.get("val_size", 0.2))
 
     device = torch.device(args.device)
-    input_channels = infer_input_channels(data_dir)
+    input_channels = infer_input_channels(data_dir, features)
 
     summary_rows = []
     activity_rows = []
@@ -249,7 +256,10 @@ def main():
             var_num_users=["0", "1", "2", "3", "4", "5"],
         )
         test_y = split_data(data_pd_y, split_seed, test_size, val_size)
-        dataset = MultiHeadSTFTDataset(test_y, data_dir, max_len=200, normalize=normalize)
+        if features == "patches":
+            dataset = MultiHeadPatchDataset(test_y, data_dir, max_tokens=128, normalize=normalize)
+        else:
+            dataset = MultiHeadSTFTDataset(test_y, data_dir, max_len=200, normalize=normalize)
 
         model = MODEL_FACTORIES[model_name](input_channels).to(device)
         load_checkpoint(model_path, model, device)

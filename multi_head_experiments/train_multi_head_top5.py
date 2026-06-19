@@ -17,9 +17,9 @@ from torch.utils.data import DataLoader
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(os.path.join(ROOT, "WiMANS-main", "benchmark", "wifi_csi"))
 
-from dataset_multi_head import MultiHeadSTFTDataset
+from dataset_multi_head import MultiHeadPatchDataset, MultiHeadSTFTDataset
 from load_data import load_data_y
-from model_multi_head import CLSTMMultiHead, ResNet18MultiHead, THATStyleMultiHead
+from model_multi_head import CLSTMMultiHead, MambaMultiHead, PatchMambaMultiHead, ResNet18MultiHead, THATStyleMultiHead
 
 
 ENVIRONMENTS = ["classroom", "meeting_room", "empty_room"]
@@ -28,11 +28,14 @@ BAND_GROUPS = {"2.4": ["2.4"], "5": ["5"], "both": ["2.4", "5"]}
 FEATURE_DIRS = {
     "multichannel": r"D:\Deepak\wifi_csi\dataset\stft_top5_multichannel_npy",
     "pca": r"D:\Deepak\wifi_csi\dataset\stft_top5_npy",
+    "patches": r"D:\Deepak\wifi_csi\dataset\stft_top5_multichannel_vit_patches_npy",
 }
 MODEL_FACTORIES = {
     "resnet18": lambda input_channels: ResNet18MultiHead(input_channels=input_channels),
     "clstm": lambda input_channels: CLSTMMultiHead(input_channels=input_channels),
     "that_style": lambda input_channels: THATStyleMultiHead(input_channels=input_channels),
+    "mamba": lambda input_channels: MambaMultiHead(input_channels=input_channels),
+    "patch_mamba": lambda input_channels: PatchMambaMultiHead(patch_dim=input_channels),
 }
 SELECT_METRICS = [
     "combined_score",
@@ -46,7 +49,7 @@ SELECT_METRICS = [
 def parse_args():
     parser = argparse.ArgumentParser(description="Multi-head Top-5 STFT experiment for activity, occupancy, and 54 slot labels.")
     parser.add_argument("--annotation", default=r"D:\Deepak\wifi_csi\WiMANS-main\dataset\annotation.csv")
-    parser.add_argument("--features", choices=["multichannel", "pca"], default="multichannel")
+    parser.add_argument("--features", choices=["multichannel", "pca", "patches"], default="multichannel")
     parser.add_argument("--data-dir", default=None)
     parser.add_argument("--model", choices=list(MODEL_FACTORIES), default="resnet18")
     parser.add_argument("--band", choices=["2.4", "5", "both", "all"], default="5")
@@ -93,6 +96,11 @@ def parse_args():
     parser.add_argument("--test-size", type=float, default=0.2)
     parser.add_argument("--val-size", type=float, default=0.2)
     parser.add_argument("--num-workers", type=int, default=0)
+    parser.add_argument(
+        "--resume-completed",
+        action="store_true",
+        help="Skip seeds that already have completed partial result JSON files in save-dir/partial_results.",
+    )
     parser.add_argument("--save-dir", default=None)
     parser.add_argument("--result-json", default=None)
     parser.add_argument("--result-excel", default=None)
@@ -113,10 +121,14 @@ def set_seed(seed):
         torch.cuda.manual_seed_all(seed)
 
 
-def infer_input_channels(data_dir):
+def infer_input_channels(data_dir, features="multichannel"):
     for filename in os.listdir(data_dir):
         if filename.endswith(".npy"):
             sample = np.load(os.path.join(data_dir, filename), mmap_mode="r")
+            if features == "patches":
+                if sample.ndim != 2:
+                    raise ValueError(f"Expected 2D patch tokens for {filename}, got {sample.shape}")
+                return sample.shape[1]
             return 1 if sample.ndim == 2 else sample.shape[0]
     raise FileNotFoundError(f"No .npy files found in {data_dir}")
 
@@ -156,6 +168,13 @@ def make_loader(dataset, args, shuffle):
         num_workers=args.num_workers,
         pin_memory=torch.cuda.is_available(),
     )
+
+
+def describe_model_backend(model):
+    for module in model.modules():
+        if hasattr(module, "uses_external_mamba"):
+            return "external mamba_ssm" if module.uses_external_mamba else "local gated state-space fallback"
+    return "standard"
 
 
 def make_criteria(train_dataset, args, device):
@@ -515,20 +534,34 @@ def train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels
     )
     train_y, val_y, test_y = split_data(data_pd_y, args)
 
-    train_dataset = MultiHeadSTFTDataset(
-        train_y,
-        args.data_dir,
-        max_len=200,
-        normalize=args.normalize,
-        augment=args.augment,
-        time_mask_width=args.time_mask_width,
-        freq_mask_width=args.freq_mask_width,
-        channel_drop_prob=args.channel_drop_prob,
-        noise_std=args.noise_std,
-        time_shift=args.time_shift,
-    )
-    val_dataset = MultiHeadSTFTDataset(val_y, args.data_dir, max_len=200, normalize=args.normalize)
-    test_dataset = MultiHeadSTFTDataset(test_y, args.data_dir, max_len=200, normalize=args.normalize)
+    if args.features == "patches":
+        train_dataset = MultiHeadPatchDataset(
+            train_y,
+            args.data_dir,
+            max_tokens=128,
+            normalize=args.normalize,
+            augment=args.augment,
+            token_mask_width=args.time_mask_width,
+            noise_std=args.noise_std,
+            token_shift=args.time_shift,
+        )
+        val_dataset = MultiHeadPatchDataset(val_y, args.data_dir, max_tokens=128, normalize=args.normalize)
+        test_dataset = MultiHeadPatchDataset(test_y, args.data_dir, max_tokens=128, normalize=args.normalize)
+    else:
+        train_dataset = MultiHeadSTFTDataset(
+            train_y,
+            args.data_dir,
+            max_len=200,
+            normalize=args.normalize,
+            augment=args.augment,
+            time_mask_width=args.time_mask_width,
+            freq_mask_width=args.freq_mask_width,
+            channel_drop_prob=args.channel_drop_prob,
+            noise_std=args.noise_std,
+            time_shift=args.time_shift,
+        )
+        val_dataset = MultiHeadSTFTDataset(val_y, args.data_dir, max_len=200, normalize=args.normalize)
+        test_dataset = MultiHeadSTFTDataset(test_y, args.data_dir, max_len=200, normalize=args.normalize)
 
     train_loader = make_loader(train_dataset, args, shuffle=True)
     val_loader = make_loader(val_dataset, args, shuffle=False)
@@ -546,6 +579,7 @@ def train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels
     epoch_history = []
 
     print(f"\n[*] MultiHead Model={args.model} Features={args.features} Env={env_name} Band={band_name} Seed={seed}")
+    print(f"    Backbone backend={describe_model_backend(model)}")
     print(
         f"    Channels={input_channels} Split train/val/test={len(train_dataset)}/{len(val_dataset)}/{len(test_dataset)}"
         f" Select={args.select_metric} Tune={args.tune_threshold} ThresholdStrategy={args.threshold_strategy}"
@@ -652,6 +686,48 @@ def summarize(values):
     return {"avg": float(values.mean()), "std": float(values.std()), "text": f"{values.mean():.2f}+/-{values.std():.2f}"}
 
 
+def partial_result_path(args, env_name, band_name, seed):
+    safe_band = str(band_name).replace(".", "p")
+    filename = f"partial_{args.model}_{args.features}_{env_name}_{safe_band}_seed{seed}.json"
+    return os.path.join(args.save_dir, "partial_results", filename)
+
+
+def load_partial_result(args, env_name, band_name, seed):
+    path = partial_result_path(args, env_name, band_name, seed)
+    if not os.path.exists(path):
+        return None
+    with open(path, "r", encoding="utf-8") as handle:
+        result = json.load(handle)
+    model_path = result.get("model_path")
+    if model_path and not os.path.exists(model_path):
+        print(f"    Resume ignored for {env_name}/{band_name}/seed{seed}: missing checkpoint {model_path}")
+        return None
+    return result
+
+
+def save_partial_result(args, env_name, band_name, seed, result):
+    path = partial_result_path(args, env_name, band_name, seed)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp_path = path + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as handle:
+        json.dump(result, handle, indent=4)
+    os.replace(tmp_path, path)
+    print(f"    Saved partial result: {path}")
+
+
+def run_or_resume_repeat(args, env_name, band_name, wifi_bands, repeat_idx, input_channels):
+    seed = args.seed_start + repeat_idx
+    if args.resume_completed:
+        result = load_partial_result(args, env_name, band_name, seed)
+        if result is not None:
+            print(f"\n[*] Resume skip Model={args.model} Features={args.features} Env={env_name} Band={band_name} Seed={seed}")
+            return result
+
+    result = train_once(args, env_name, band_name, wifi_bands, repeat_idx, input_channels)
+    save_partial_result(args, env_name, band_name, seed, result)
+    return result
+
+
 def print_table(results):
     print("\n" + "=" * 124)
     print("Multi-Head Top-5 STFT Results - Final Test Only")
@@ -752,14 +828,17 @@ def write_excel(args, results):
 def main():
     args = parse_args()
     args.data_dir = args.data_dir or FEATURE_DIRS[args.features]
-    input_channels = infer_input_channels(args.data_dir)
+    input_channels = infer_input_channels(args.data_dir, args.features)
     selected_bands = BAND_GROUPS if args.band == "all" else {args.band: BAND_GROUPS[args.band]}
 
     results = {}
     for band_name, wifi_bands in selected_bands.items():
         results[band_name] = {}
         for env_name in ENVIRONMENTS:
-            repeats = [train_once(args, env_name, band_name, wifi_bands, idx, input_channels) for idx in range(args.repeat)]
+            repeats = [
+                run_or_resume_repeat(args, env_name, band_name, wifi_bands, idx, input_channels)
+                for idx in range(args.repeat)
+            ]
             results[band_name][env_name] = {
                 "direct_activity_set_micro_f1": summarize([r["direct_activity_set_micro_f1"] for r in repeats]),
                 "direct_occupancy_micro_f1": summarize([r["direct_occupancy_micro_f1"] for r in repeats]),

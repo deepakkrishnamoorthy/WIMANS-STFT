@@ -2,6 +2,11 @@ import torch
 import torch.nn as nn
 from torchvision.models import resnet18
 
+try:
+    from mamba_ssm import Mamba as ExternalMamba
+except Exception:
+    ExternalMamba = None
+
 
 class ResNetBackbone(nn.Module):
     def __init__(self, input_channels=45):
@@ -134,6 +139,111 @@ class THATStyleMultiHead(nn.Module, MultiHeadOutputMixin):
         fmap = self.backbone(x)
         seq = fmap.mean(dim=2).permute(0, 2, 1)
         seq = self.proj(seq)
+        for block in self.blocks:
+            seq = block(seq)
+        features = self.summary(seq.mean(dim=1))
+        return self.heads_forward(features)
+
+
+class GatedStateSpaceFallbackBlock(nn.Module):
+    """Small Mamba-style sequence block used when mamba_ssm is unavailable."""
+
+    def __init__(self, dim=256, expansion=2, kernel_size=5, dropout=0.1):
+        super().__init__()
+        inner_dim = dim * expansion
+        self.norm = nn.LayerNorm(dim)
+        self.in_proj = nn.Linear(dim, inner_dim * 2)
+        self.depthwise = nn.Conv1d(
+            inner_dim,
+            inner_dim,
+            kernel_size=kernel_size,
+            padding=kernel_size // 2,
+            groups=inner_dim,
+        )
+        self.decay = nn.Parameter(torch.zeros(inner_dim))
+        self.out_proj = nn.Linear(inner_dim, dim)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x):
+        residual = x
+        x = self.norm(x)
+        x_main, gate = self.in_proj(x).chunk(2, dim=-1)
+        x_main = torch.nn.functional.silu(self.depthwise(x_main.permute(0, 2, 1)).permute(0, 2, 1))
+
+        alpha = torch.sigmoid(self.decay).view(1, 1, -1)
+        state = torch.zeros_like(x_main[:, :1, :])
+        outputs = []
+        for step in range(x_main.shape[1]):
+            state = alpha * state + (1.0 - alpha) * x_main[:, step:step + 1, :]
+            outputs.append(state)
+        x_state = torch.cat(outputs, dim=1)
+
+        x_state = x_state * torch.nn.functional.silu(gate)
+        return residual + self.dropout(self.out_proj(x_state))
+
+
+class MambaSequenceBlock(nn.Module):
+    def __init__(self, dim=256, dropout=0.1):
+        super().__init__()
+        if ExternalMamba is not None:
+            self.block = ExternalMamba(d_model=dim, d_state=16, d_conv=4, expand=2)
+            self.dropout = nn.Dropout(dropout)
+            self.uses_external_mamba = True
+        else:
+            self.block = GatedStateSpaceFallbackBlock(dim=dim, dropout=dropout)
+            self.dropout = nn.Identity()
+            self.uses_external_mamba = False
+
+    def forward(self, x):
+        return self.dropout(self.block(x))
+
+
+class MambaMultiHead(nn.Module, MultiHeadOutputMixin):
+    def __init__(self, input_channels=45, dim=256, depth=3, dropout=0.3):
+        super().__init__()
+        self.backbone = ResNetBackbone(input_channels=input_channels)
+        self.proj = nn.Sequential(
+            nn.Linear(512, dim),
+            nn.LayerNorm(dim),
+            nn.SiLU(inplace=True),
+        )
+        self.blocks = nn.ModuleList([MambaSequenceBlock(dim=dim, dropout=dropout) for _ in range(depth)])
+        self.summary = nn.Sequential(
+            nn.LayerNorm(dim),
+            nn.Dropout(dropout),
+        )
+        self.build_heads(feature_dim=dim, dropout=dropout)
+
+    def forward(self, x):
+        fmap = self.backbone(x)
+        seq = fmap.mean(dim=2).permute(0, 2, 1)
+        seq = self.proj(seq)
+        for block in self.blocks:
+            seq = block(seq)
+        features = self.summary(seq.mean(dim=1))
+        return self.heads_forward(features)
+
+
+class PatchMambaMultiHead(nn.Module, MultiHeadOutputMixin):
+    def __init__(self, patch_dim=11520, dim=256, depth=3, max_tokens=128, dropout=0.3):
+        super().__init__()
+        self.patch_embed = nn.Sequential(
+            nn.Linear(patch_dim, dim),
+            nn.LayerNorm(dim),
+            nn.SiLU(inplace=True),
+        )
+        self.pos_embed = nn.Parameter(torch.zeros(1, max_tokens, dim))
+        nn.init.trunc_normal_(self.pos_embed, std=0.02)
+        self.blocks = nn.ModuleList([MambaSequenceBlock(dim=dim, dropout=dropout) for _ in range(depth)])
+        self.summary = nn.Sequential(
+            nn.LayerNorm(dim),
+            nn.Dropout(dropout),
+        )
+        self.build_heads(feature_dim=dim, dropout=dropout)
+
+    def forward(self, x):
+        seq = self.patch_embed(x)
+        seq = seq + self.pos_embed[:, :seq.shape[1], :]
         for block in self.blocks:
             seq = block(seq)
         features = self.summary(seq.mean(dim=1))
